@@ -26,5 +26,3 @@ npm run dev
 Run `npm run build` before pushing a structural change.
 
 ## Model credit
-
-The interactive homepage model is the Stanford Dragon from the [Stanford 3D Scanning Repository](https://graphics.stanford.edu/data/3Dscanrep/), using the web-ready Dragon Attenuation conversion published by the [Khronos glTF Sample Assets project](https://github.com/KhronosGroup/glTF-Sample-Assets/tree/main/Models/DragonAttenuation). The viewer loads Three.js and the model only when the hero is near the viewport.
