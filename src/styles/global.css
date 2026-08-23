@@ -66,7 +66,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .unity-icon-group { display: flex; align-items: center; gap: clamp(38px, 5vw, 72px); padding-right: clamp(38px, 5vw, 72px); }
 .unity-icon-group img { width: clamp(48px, 5vw, 66px); height: clamp(48px, 5vw, 66px); object-fit: contain; flex: none; }
 @keyframes unity-scroll { to { transform: translateX(-50%); } }
-.post-list { counter-reset: project; }
+.post-list { counter-reset: project; border-top: 1px solid var(--ink); }
 .post-preview { counter-increment: project; position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(32px, 6vw, 88px); padding: clamp(64px, 8vw, 112px) 0; border-bottom: 1px solid var(--ink); align-items: center; }
 .post-preview:nth-child(even) { grid-template-columns: minmax(260px, .75fr) minmax(0, 1.55fr); }
 .post-preview:nth-child(even) .preview-media { order: 2; }
