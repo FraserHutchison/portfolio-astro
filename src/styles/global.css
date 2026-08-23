@@ -45,7 +45,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
   background-size: 40px 40px;
 }
 .eyebrow { margin: 0 0 12px; color: var(--muted); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
-.intro > .eyebrow, .about-copy > .eyebrow { display: inline-block; width: max-content; padding: 2px 7px; color: #fff; background: var(--motif); }
+.intro > .eyebrow, .about-copy > .eyebrow { display: inline-block; width: max-content; padding: 2px 7px; color: #fff; background: var(--motif); font-size: 1.1rem; }
 h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .intro h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; }
 .intro > *, .about-copy > * { animation: intro-fade 700ms ease-out both; }
