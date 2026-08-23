@@ -146,6 +146,7 @@ a:focus-visible {
   max-width: 720px;
 }
 .hero-grid {
+  border-bottom: 1px solid var(--rule);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
@@ -487,7 +488,7 @@ h3 {
   display: grid;
   grid-template-columns: minmax(220px, 340px) minmax(0, 680px);
   gap: clamp(40px, 8vw, 112px);
-  align-items: start;
+  align-items: center;
 }
 .about-intro::before {
   content: "";
