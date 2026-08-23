@@ -3,12 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostPreview from '../components/PostPreview.astro';
 import UnityIconStrip from '../components/UnityIconStrip.astro';
+import { SITE } from '../config/site';
+import { sortPosts } from '../utils/posts';
 
-const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a, b) => {
-  if (a.data.pinned !== b.data.pinned) return a.data.pinned ? -1 : 1;
-  if (a.data.pinned && b.data.pinned) return (a.data.pinOrder ?? 999) - (b.data.pinOrder ?? 999);
-  return b.data.date.valueOf() - a.data.date.valueOf();
-});
+const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(sortPosts);
 ---
 <BaseLayout>
   <div class="hero-grid">
@@ -17,8 +15,8 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a,
       <h1>Fraser Hutchison</h1>
       <p class="intro-copy">Technical artist specialising in Unity and URP rendering, shader development, mobile optimisation, and production tools for artists.</p>
       <div class="links">
-        <a href="https://github.com/FraserHutchison"><img src="/icons/github.svg" alt="" />GitHub</a>
-        <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/"><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
+        <a href={SITE.social.github}><img src="/icons/github.svg" alt="" />GitHub</a>
+        <a href={SITE.social.linkedin}><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
       </div>
       <img class="hero-artwork" src="/hero-artwork.svg" alt="" width="1200" height="1200" />
     </section>

@@ -3,10 +3,11 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Video from '../../components/Video.astro';
 import YouTube from '../../components/YouTube.astro';
+import { getPostSlug } from '../../utils/posts';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
-  return posts.map((post) => ({ params: { slug: post.id.split('/')[0] }, props: { post } }));
+  return posts.map((post) => ({ params: { slug: getPostSlug(post) }, props: { post } }));
 }
 
 const { post } = Astro.props;

@@ -1,6 +1,10 @@
+---
+import { SITE } from '../config/site';
+---
+
 <footer class="site-footer shell">
   <div class="footer-identity">
-    <span>Fraser Hutchison — Technical Artist</span>
-    <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/" rel="me noreferrer">LinkedIn</a>
+    <span>{SITE.name} — {SITE.role}</span>
+    <a href={SITE.social.linkedin} rel="me noreferrer">LinkedIn</a>
   </div>
 </footer>

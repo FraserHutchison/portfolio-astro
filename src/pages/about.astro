@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../config/site';
 ---
 <BaseLayout title="About" description="About Fraser Hutchison, a technical artist working in games.">
   <article class="about shell">
@@ -12,9 +13,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>Technical Artist</h1>
         <p>I’m a technical artist at SEGA HARDlight. Most of my work is in Unity and URP, where I build shaders and rendering features, profile mobile hardware, and make tools that help artists get their work into the game.</p>
         <div class="links">
-          <a href="https://github.com/FraserHutchison"><img src="/icons/github.svg" alt="" />GitHub</a>
-          <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/"><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
-          <a href="https://www.artstation.com/fraserhutchison"><img src="/icons/artstation.svg" alt="" />ArtStation</a>
+          <a href={SITE.social.github}><img src="/icons/github.svg" alt="" />GitHub</a>
+          <a href={SITE.social.linkedin}><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
+          <a href={SITE.social.artstation}><img src="/icons/artstation.svg" alt="" />ArtStation</a>
         </div>
       </div>
     </section>

@@ -1,9 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-interface Props { post: CollectionEntry<'posts'>; }
+import { getPostSlug } from '../utils/posts';
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+}
+
 const { post } = Astro.props;
-const slug = post.id.split('/')[0];
+const slug = getPostSlug(post);
 ---
 <article class:list={['post-preview', !post.data.cover && 'text-only']}>
   {post.data.cover && (

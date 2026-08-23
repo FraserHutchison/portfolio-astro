@@ -16,6 +16,8 @@ Local video uses `<Video src="./clip.mp4" autoplay loop muted />` and YouTube us
 
 Pinned posts appear first without a label. Set `pinned: true` and `pinOrder: 1` in frontmatter. All other posts are newest-first.
 
+Set `draft: true` to keep an unfinished post and its legacy redirect out of the generated site.
+
 ## Local preview
 
 ```sh
@@ -24,5 +26,3 @@ npm run dev
 ```
 
 Run `npm run build` before pushing a structural change.
-
-## Model credit

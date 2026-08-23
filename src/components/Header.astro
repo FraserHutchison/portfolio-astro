@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../config/site';
+
 const path = Astro.url.pathname;
 ---
 <header class="site-header shell">
@@ -7,7 +9,7 @@ const path = Astro.url.pathname;
     <a class="home-link" href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
     <a class="about-link" href="/about/" aria-current={path === '/about/' ? 'page' : undefined}>About</a>
   </nav>
-  <a class="header-social" href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/">
+  <a class="header-social" href={SITE.social.linkedin} rel="me noreferrer">
     <img src="/icons/linkedin.svg" alt="" />
     <span>LinkedIn</span>
   </a>
