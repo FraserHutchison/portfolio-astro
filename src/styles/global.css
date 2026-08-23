@@ -23,6 +23,7 @@
   --divider-height: 8px;
   --divider-width: 16px;
   --divider-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'%3E%3Cpath d='M0 7.5 8 .5l8 7' fill='none' stroke='black'/%3E%3C/svg%3E");
+  --section-divider-gap: clamp(32px, 4vw, 56px);
   --social-icon-size: 18px;
   --nav-gap: clamp(20px, 4vw, 44px);
   --mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -258,6 +259,7 @@ h3 {
 .post-list {
   position: relative;
   counter-reset: project;
+  margin-top: var(--section-divider-gap);
 }
 .post-preview {
   counter-increment: project;
@@ -479,10 +481,10 @@ h3 {
   background: var(--dark-media);
 }
 .about {
+  --grid-bleed: clamp(48px, 7vw, 88px);
   padding: clamp(48px, 7vw, 88px) 0 clamp(64px, 10vw, 128px);
 }
 .about-intro {
-  --grid-bleed: clamp(48px, 7vw, 88px);
   position: relative;
   isolation: isolate;
   display: grid;
@@ -499,6 +501,7 @@ h3 {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
+  border-bottom: 1px solid var(--rule);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
@@ -543,7 +546,7 @@ h3 {
 .projects {
   position: relative;
   counter-reset: employer;
-  margin-top: clamp(88px, 12vw, 152px);
+  margin-top: calc(var(--grid-bleed) + var(--section-divider-gap));
 }
 .experience {
   counter-increment: employer;
