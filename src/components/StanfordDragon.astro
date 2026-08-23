@@ -1,5 +1,5 @@
-<div class="dragon-stage" role="img" aria-label="Interactive 3D model of the Stanford Dragon. Drag to rotate.">
-  <div class="dragon-loading" aria-hidden="true">Loading model…</div>
+<div class="dragon-stage" role="img" aria-label="Interactive 3D material preview ball. Drag to rotate.">
+  <div class="dragon-loading" aria-hidden="true">Loading preview…</div>
 </div>
 
 <script>
@@ -9,9 +9,8 @@
     stage.dataset.ready = 'true';
 
     const start = async () => {
-      const [THREE, { GLTFLoader }, { OrbitControls }] = await Promise.all([
+      const [THREE, { OrbitControls }] = await Promise.all([
         import('three'),
-        import('three/examples/jsm/loaders/GLTFLoader.js'),
         import('three/examples/jsm/controls/OrbitControls.js'),
       ]);
 
@@ -40,36 +39,29 @@
 
       let visible = true;
 
-      new GLTFLoader().load('/models/stanford-dragon.glb', (gltf) => {
-        const dragon = gltf.scene.getObjectByName('Dragon');
-        if (!dragon) return;
+      const geometry = new THREE.SphereGeometry(1.35, 96, 64);
+      const position = geometry.attributes.position;
+      const point = new THREE.Vector3();
+      for (let index = 0; index < position.count; index += 1) {
+        point.fromBufferAttribute(position, index);
+        const direction = point.clone().normalize();
+        const ripple = Math.sin(direction.y * 13 + direction.x * 5) * 0.045;
+        const dimples = Math.sin(direction.x * 9) * Math.sin(direction.z * 9) * 0.035;
+        point.copy(direction).multiplyScalar(1.35 + ripple + dimples);
+        position.setXYZ(index, point.x, point.y, point.z);
+      }
+      geometry.computeVertexNormals();
 
-        dragon.removeFromParent();
-        scene.add(dragon);
-        dragon.traverse((child) => {
-          if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshLambertMaterial({ color: 0x8b8f91 });
-          }
-        });
-
-        dragon.rotation.y = 0;
-        const box = new THREE.Box3().setFromObject(dragon);
-        const center = box.getCenter(new THREE.Vector3());
-        dragon.position.sub(center);
-
-        const sphere = new THREE.Box3().setFromObject(dragon).getBoundingSphere(new THREE.Sphere());
-        const verticalFov = THREE.MathUtils.degToRad(camera.fov);
-        const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
-        const limitingFov = Math.min(verticalFov, horizontalFov);
-        const fittedDistance = (sphere.radius / Math.sin(limitingFov / 2)) * 1.02;
-        camera.near = fittedDistance / 100;
-        camera.far = fittedDistance * 100;
-        camera.position.set(0, 0, fittedDistance);
-        camera.updateProjectionMatrix();
-        controls.target.set(0, 0, 0);
-        controls.update();
-        stage.classList.add('is-loaded');
-      });
+      const materialBall = new THREE.Mesh(
+        geometry,
+        new THREE.MeshLambertMaterial({ color: 0x8b8f91 }),
+      );
+      materialBall.rotation.set(-0.18, 0.35, 0.08);
+      scene.add(materialBall);
+      camera.position.set(0, 0, 5.2);
+      controls.target.set(0, 0, 0);
+      controls.update();
+      stage.classList.add('is-loaded');
 
       const resize = () => {
         const { width, height } = stage.getBoundingClientRect();
