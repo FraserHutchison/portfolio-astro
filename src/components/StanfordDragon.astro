@@ -48,7 +48,7 @@
         scene.add(dragon);
         dragon.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshStandardMaterial({ color: 0x45494b, roughness: 0.62, metalness: 0.08 });
+            child.material = new THREE.MeshToonMaterial({ color: 0x7f8d91 });
           }
         });
 
