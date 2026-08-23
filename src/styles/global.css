@@ -64,6 +64,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .preview-content time { color: var(--muted); font-size: .82rem; letter-spacing: .08em; }
 .text-only { grid-template-columns: minmax(0, 760px); }
 .site-footer { display: flex; justify-content: space-between; gap: 24px; padding: 48px 0 64px; color: var(--muted); font-size: .85rem; }
+.footer-identity { display: grid; justify-items: start; gap: 8px; }
 .article-head { width: min(100%, var(--prose)); margin: clamp(64px, 10vw, 128px) auto clamp(48px, 7vw, 88px); }
 .article-head h1 { margin: 12px 0 24px; font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 700; letter-spacing: -.055em; }
 .article-head .description { color: var(--muted); font-size: 1.2rem; }
