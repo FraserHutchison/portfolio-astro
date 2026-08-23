@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Video from '../../components/Video.astro';
@@ -21,7 +20,6 @@ const { Content } = await render(post);
       {post.data.description && <p class="description">{post.data.description}</p>}
       {post.data.externalLink && <p><a href={post.data.externalLink}>View project on GitHub ↗</a></p>}
     </header>
-    {post.data.cover && <div class="article-cover"><Image src={post.data.cover} alt="" widths={[720, 1080, 1600]} sizes="(max-width: 1160px) 100vw, 1160px" /></div>}
     <div class="prose"><Content components={{ Video, YouTube }} /></div>
   </article>
 </BaseLayout>
