@@ -63,17 +63,21 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .about-copy h1 { margin: 0 0 32px; font-size: clamp(3rem, 7vw, 6rem); font-weight: 700; letter-spacing: -.055em; }
 .about-copy p { font-size: 1.1rem; }
 .projects { margin-top: clamp(88px, 12vw, 152px); border-top: 1px solid var(--rule); }
-.projects-head { display: flex; justify-content: space-between; gap: 32px; align-items: baseline; padding: 32px 0 48px; }
+.projects-head { padding: 32px 0 48px; }
 .projects-head h2 { margin: 0; font-size: clamp(2.2rem, 5vw, 4.5rem); }
-.projects-head p { margin: 0; color: var(--muted); }
-.project-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
-.project { min-width: 0; background: var(--paper); }
-.project-cover { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; background: #d8dde0; }
-.project-info { padding: 22px; }
-.company { display: flex; gap: 10px; align-items: center; min-height: 34px; margin-bottom: 22px; color: var(--muted); font-size: .76rem; letter-spacing: .06em; text-transform: uppercase; }
-.company img { width: 28px; height: 28px; object-fit: contain; }
-.project h3 { margin: 0 0 8px; font-size: 1.25rem; letter-spacing: -.025em; }
-.project p { margin: 0; color: var(--muted); font-size: .9rem; }
+.experience-list { border-top: 1px solid var(--rule); }
+.experience { padding: clamp(40px, 6vw, 72px) 0; border-bottom: 1px solid var(--rule); }
+.experience-heading { display: flex; justify-content: space-between; gap: 32px; align-items: center; margin-bottom: 32px; }
+.company-lockup { display: flex; gap: 18px; align-items: center; }
+.company-lockup > img { width: 52px; height: 52px; object-fit: contain; }
+.company-lockup h3 { margin: 0 0 3px; font-size: 1.5rem; }
+.company-lockup p, .tenure { margin: 0; color: var(--muted); }
+.tenure { font-size: .9rem; white-space: nowrap; }
+.games-list { display: grid; gap: 16px; }
+.game { display: grid; grid-template-columns: minmax(180px, 360px) 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; min-height: 220px; background: color-mix(in srgb, white 28%, var(--paper)); }
+.game-cover { width: 100%; height: 220px; object-fit: cover; background: #d8dde0; }
+.game h4 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.6rem); letter-spacing: -.035em; }
+.game .eyebrow { margin-bottom: 8px; }
 @media (max-width: 720px) {
   .shell { width: min(calc(100% - 32px), var(--page)); }
   .site-header { min-height: 84px; }
@@ -85,9 +89,14 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .site-footer { flex-direction: column; }
   .about-intro { grid-template-columns: 1fr; }
   .profile-picture { width: min(72vw, 320px); }
-  .projects-head { display: block; }
-  .projects-head p { margin-top: 12px; }
-  .project-grid { grid-template-columns: repeat(2, 1fr); }
+  .experience-heading { display: block; }
+  .tenure { margin-top: 12px; }
+  .game { grid-template-columns: 120px 1fr; min-height: 150px; gap: 20px; }
+  .game-cover { height: 150px; }
 }
-@media (max-width: 440px) { .project-grid { grid-template-columns: 1fr; } }
+@media (max-width: 440px) {
+  .game { grid-template-columns: 1fr; }
+  .game-cover { height: auto; aspect-ratio: 16 / 10; }
+  .game > div { padding: 0 20px 24px; }
+}
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }

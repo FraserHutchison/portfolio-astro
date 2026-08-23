@@ -6,8 +6,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="about-intro">
       <img class="profile-picture" src="/about/profile-picture.jpg" alt="Fraser Hutchison" width="512" height="512" />
       <div class="about-copy">
-        <p class="eyebrow">About</p>
-        <h1>Technical art in service of the picture.</h1>
+        <p class="eyebrow">Fraser Hutchison</p>
+        <h1>Technical Artist</h1>
         <p>I’m Fraser Hutchison, a technical artist working across rendering, shaders, optimisation and art tools for games.</p>
         <p>My work sits between art and engineering: building visual systems, helping artists work efficiently, and finding practical ways to make ambitious visuals perform across a wide range of hardware.</p>
         <p>My professional work includes projects at SEGA HARDlight and Frontier Developments, with a particular focus on Unity, URP, mobile rendering and production-friendly shader workflows.</p>
@@ -21,42 +21,47 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <section class="projects" aria-labelledby="projects-heading">
       <header class="projects-head">
-        <h2 id="projects-heading">Selected projects</h2>
-        <p>Games I’ve contributed to professionally.</p>
+        <h2 id="projects-heading">Experience</h2>
       </header>
-      <div class="project-grid">
-        <article class="project">
-          <img class="project-cover" src="/about/sonic-dream-team.jpg" alt="Sonic Dream Team cover artwork" width="1024" height="1024" loading="lazy" />
-          <div class="project-info">
-            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
-            <h3>Sonic Dream Team</h3>
-            <p>Technical Artist</p>
+      <div class="experience-list">
+        <section class="experience" aria-labelledby="hardlight-heading">
+          <header class="experience-heading">
+            <div class="company-lockup">
+              <img src="/about/sega-hardlight.png" alt="" />
+              <div><h3 id="hardlight-heading">SEGA HARDlight</h3><p>Technical Artist</p></div>
+            </div>
+            <p class="tenure">February 2022 — Present</p>
+          </header>
+          <div class="games-list">
+            <article class="game">
+              <img class="game-cover" src="/about/sonic-dream-team.jpg" alt="Sonic Dream Team cover artwork" width="1024" height="1024" loading="lazy" />
+              <div><p class="eyebrow">Apple Arcade</p><h4>Sonic Dream Team</h4></div>
+            </article>
+            <article class="game">
+              <img class="game-cover" src="/about/sonic-forces.png" alt="Sonic Forces: Speed Battle cover artwork" width="1200" height="630" loading="lazy" />
+              <div><p class="eyebrow">Mobile</p><h4>Sonic Forces: Speed Battle</h4></div>
+            </article>
+            <article class="game">
+              <img class="game-cover" src="/about/sonic-dash.png" alt="Sonic Dash cover artwork" width="1200" height="630" loading="lazy" />
+              <div><p class="eyebrow">Mobile</p><h4>Sonic Dash</h4></div>
+            </article>
           </div>
-        </article>
-        <article class="project">
-          <img class="project-cover" src="/about/sonic-forces.png" alt="Sonic Forces: Speed Battle cover artwork" width="1200" height="630" loading="lazy" />
-          <div class="project-info">
-            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
-            <h3>Sonic Forces: Speed Battle</h3>
-            <p>Technical Artist</p>
+        </section>
+        <section class="experience" aria-labelledby="frontier-heading">
+          <header class="experience-heading">
+            <div class="company-lockup">
+              <img src="/about/frontier-developments.png" alt="" />
+              <div><h3 id="frontier-heading">Frontier Developments</h3><p>3D Artist</p></div>
+            </div>
+            <p class="tenure">July 2021 — February 2022</p>
+          </header>
+          <div class="games-list">
+            <article class="game">
+              <img class="game-cover" src="/about/f1-manager-2022.png" alt="F1 Manager 2022 cover artwork" width="385" height="513" loading="lazy" />
+              <div><p class="eyebrow">PC &amp; Console</p><h4>F1 Manager 2022</h4></div>
+            </article>
           </div>
-        </article>
-        <article class="project">
-          <img class="project-cover" src="/about/sonic-dash.png" alt="Sonic Dash cover artwork" width="1200" height="630" loading="lazy" />
-          <div class="project-info">
-            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
-            <h3>Sonic Dash</h3>
-            <p>Technical Artist</p>
-          </div>
-        </article>
-        <article class="project">
-          <img class="project-cover" src="/about/f1-manager-2022.png" alt="F1 Manager 2022 cover artwork" width="385" height="513" loading="lazy" />
-          <div class="project-info">
-            <div class="company"><img src="/about/frontier-developments.png" alt="" /><span>Frontier Developments</span></div>
-            <h3>F1 Manager 2022</h3>
-            <p>3D Artist</p>
-          </div>
-        </article>
+        </section>
       </div>
     </section>
   </article>
