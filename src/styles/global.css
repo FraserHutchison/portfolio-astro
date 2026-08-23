@@ -65,19 +65,22 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .projects { margin-top: clamp(88px, 12vw, 152px); border-top: 1px solid var(--rule); }
 .projects-head { padding: 32px 0 48px; }
 .projects-head h2 { margin: 0; font-size: clamp(2.2rem, 5vw, 4.5rem); }
-.experience-list { border-top: 1px solid var(--rule); }
-.experience { padding: clamp(40px, 6vw, 72px) 0; border-bottom: 1px solid var(--rule); }
-.experience-heading { display: flex; justify-content: space-between; gap: 32px; align-items: center; margin-bottom: 32px; }
+.experience-list { display: grid; grid-template-columns: 1.35fr .85fr; gap: 20px; }
+.experience { padding: clamp(28px, 4vw, 44px); border: 1px solid var(--rule); background: color-mix(in srgb, white 22%, var(--paper)); }
+.experience-heading { min-height: 124px; margin-bottom: 32px; }
 .company-lockup { display: flex; gap: 18px; align-items: center; }
 .company-lockup > img { width: 52px; height: 52px; object-fit: contain; }
 .company-lockup h3 { margin: 0 0 3px; font-size: 1.5rem; }
 .company-lockup p, .tenure { margin: 0; color: var(--muted); }
-.tenure { font-size: .9rem; white-space: nowrap; }
-.games-list { display: grid; gap: 16px; }
-.game { display: grid; grid-template-columns: minmax(180px, 360px) 1fr; gap: clamp(24px, 5vw, 64px); align-items: center; min-height: 220px; background: color-mix(in srgb, white 28%, var(--paper)); }
-.game-cover { width: 100%; height: 220px; object-fit: cover; background: #d8dde0; }
-.game h4 { margin: 0; font-size: clamp(1.5rem, 3vw, 2.6rem); letter-spacing: -.035em; }
-.game .eyebrow { margin-bottom: 8px; }
+.tenure { margin: 18px 0 0 70px; font-size: .86rem; }
+.games-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.experience:last-child .games-list { grid-template-columns: 1fr; }
+.game { min-width: 0; background: color-mix(in srgb, white 38%, var(--paper)); }
+.game-cover { width: 100%; aspect-ratio: 1; object-fit: cover; background: #d8dde0; }
+.experience:last-child .game-cover { aspect-ratio: 4 / 5; }
+.game > div { padding: 18px; }
+.game h4 { margin: 0; font-size: clamp(1.05rem, 1.8vw, 1.35rem); letter-spacing: -.025em; }
+.game .eyebrow { margin-bottom: 7px; font-size: .68rem; }
 @media (max-width: 720px) {
   .shell { width: min(calc(100% - 32px), var(--page)); }
   .site-header { min-height: 84px; }
@@ -89,14 +92,13 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .site-footer { flex-direction: column; }
   .about-intro { grid-template-columns: 1fr; }
   .profile-picture { width: min(72vw, 320px); }
-  .experience-heading { display: block; }
-  .tenure { margin-top: 12px; }
-  .game { grid-template-columns: 120px 1fr; min-height: 150px; gap: 20px; }
-  .game-cover { height: 150px; }
+  .experience-list { grid-template-columns: 1fr; }
+  .experience-heading { min-height: auto; }
 }
 @media (max-width: 440px) {
-  .game { grid-template-columns: 1fr; }
-  .game-cover { height: auto; aspect-ratio: 16 / 10; }
-  .game > div { padding: 0 20px 24px; }
+  .experience { padding: 24px; }
+  .games-list { grid-template-columns: 1fr; }
+  .experience:last-child .game-cover { aspect-ratio: 1; }
+  .tenure { margin-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
