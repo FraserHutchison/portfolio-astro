@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft && Boolean(data.legacyPath));
+  return posts.map((post) => {
+    const [year, month, day, slug] = post.data.legacyPath!.split('/').filter(Boolean);
+    return { params: { year, month, day, slug }, props: { destination: `/posts/${post.id.split('/')[0]}/` } };
+  });
+}
+const { destination } = Astro.props;
+return Astro.redirect(destination, 301);
+---

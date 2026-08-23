@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Video from '../../components/Video.astro';
+import YouTube from '../../components/YouTube.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id.split('/')[0] }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="shell">
+    <header class="article-head">
+      <p class="eyebrow"><time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })}</time></p>
+      <h1>{post.data.title}</h1>
+      {post.data.description && <p class="description">{post.data.description}</p>}
+      {post.data.externalLink && <p><a href={post.data.externalLink}>View project on GitHub ↗</a></p>}
+    </header>
+    {post.data.cover && <div class="article-cover"><Image src={post.data.cover} alt="" widths={[720, 1080, 1600]} sizes="(max-width: 1160px) 100vw, 1160px" /></div>}
+    <div class="prose"><Content components={{ Video, YouTube }} /></div>
+  </article>
+</BaseLayout>

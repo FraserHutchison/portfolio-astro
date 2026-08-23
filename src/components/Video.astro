@@ -1,0 +1,7 @@
+---
+interface Props { src: string; autoplay?: boolean; loop?: boolean; muted?: boolean; controls?: boolean; poster?: string; }
+const { src, autoplay = false, loop = false, muted = autoplay, controls = true, poster } = Astro.props;
+---
+<video class="video" src={src} {autoplay} {loop} {muted} {controls} {poster} playsinline preload="metadata">
+  Your browser does not support embedded video.
+</video>

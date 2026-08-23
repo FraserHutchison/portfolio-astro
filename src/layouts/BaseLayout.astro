@@ -1,0 +1,32 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+interface Props { title?: string; description?: string; image?: string; }
+const { title = 'Fraser Hutchison — Technical Artist', description = 'Technical art, rendering, shaders and optimisation for games.', image } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const pageTitle = title === 'Fraser Hutchison — Technical Artist' ? title : `${title} — Fraser Hutchison`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <Header />
+    <main><slot /></main>
+    <Footer />
+  </body>
+</html>

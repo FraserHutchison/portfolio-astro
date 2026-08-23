@@ -1,0 +1,9 @@
+---
+interface Props { url: string; title?: string; }
+const { url, title = 'YouTube video' } = Astro.props;
+const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([\w-]{11})/);
+const id = match?.[1] ?? url.split('?')[0];
+---
+<div class="embed">
+  <iframe src={`https://www.youtube-nocookie.com/embed/${id}`} {title} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>

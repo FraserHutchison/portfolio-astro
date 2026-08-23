@@ -1,0 +1,20 @@
+{
+  "name": "portfolio-astro",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/copy-media.mjs && astro dev",
+    "build": "node scripts/copy-media.mjs && astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "latest",
+    "astro": "latest"
+  },
+  "devDependencies": {
+    "@astrojs/check": "latest",
+    "typescript": "latest"
+  }
+}

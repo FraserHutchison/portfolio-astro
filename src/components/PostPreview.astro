@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+interface Props { post: CollectionEntry<'posts'>; }
+const { post } = Astro.props;
+const slug = post.id.split('/')[0];
+---
+<article class:list={['post-preview', !post.data.cover && 'text-only']}>
+  {post.data.cover && (
+    <a class="preview-media" href={`/posts/${slug}/`} tabindex="-1" aria-hidden="true">
+      <Image src={post.data.cover} alt="" widths={[480, 720, 1080]} sizes="(max-width: 720px) 100vw, 65vw" loading="lazy" />
+    </a>
+  )}
+  <div class="preview-content">
+    <h2><a href={`/posts/${slug}/`}>{post.data.title}</a></h2>
+    {post.data.description && <p>{post.data.description}</p>}
+    <time datetime={post.data.date.toISOString()}>{post.data.date.getFullYear()}</time>
+  </div>
+</article>
