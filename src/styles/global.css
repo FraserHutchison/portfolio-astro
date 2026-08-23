@@ -97,8 +97,8 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .company-lockup h3 { margin: 0 0 3px; font-size: 1.5rem; }
 .company-lockup p, .tenure { margin: 0; color: var(--muted); }
 .tenure { margin: 18px 0 0 70px; font-size: .86rem; }
-.games-list { display: grid; align-content: start; border-top: 1px solid var(--rule); }
-.game { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 24px; align-items: center; min-width: 0; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.games-list { display: grid; align-content: start; gap: 16px; }
+.game { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 24px; align-items: center; min-width: 0; }
 .game-cover { width: 104px; height: 88px; object-fit: cover; background: #d8dde0; }
 .game > div { padding: 0; }
 .game h4 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.55rem); letter-spacing: -.025em; }
