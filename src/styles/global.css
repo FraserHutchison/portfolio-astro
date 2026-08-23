@@ -581,9 +581,6 @@ h3 {
   height: 52px;
   object-fit: contain;
 }
-.company-lockup > img.frontier-logo {
-  filter: brightness(0);
-}
 .company-lockup h3 {
   margin: 0 0 3px;
   font-size: 1.5rem;
