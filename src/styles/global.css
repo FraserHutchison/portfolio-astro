@@ -23,7 +23,20 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .site-name { font-weight: 650; letter-spacing: -.02em; text-decoration: none; }
 .site-nav { display: flex; align-items: center; gap: clamp(20px, 4vw, 44px); }
 .site-nav a { text-decoration: none; }
-.intro { padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); max-width: 780px; }
+.intro { position: relative; isolation: isolate; padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); max-width: 780px; }
+.intro::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
 .eyebrow { margin: 0 0 12px; color: var(--muted); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
 h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .intro h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; }
