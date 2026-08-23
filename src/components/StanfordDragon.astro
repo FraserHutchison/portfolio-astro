@@ -23,10 +23,11 @@
       stage.append(renderer.domElement);
 
       const controls = new OrbitControls(camera, renderer.domElement);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       controls.enableDamping = true;
       controls.enablePan = false;
       controls.enableZoom = false;
-      controls.autoRotate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      controls.autoRotate = !reduceMotion;
       controls.autoRotateSpeed = 0.8;
 
       scene.add(new THREE.HemisphereLight(0xffffff, 0x657079, 2.4));
@@ -42,15 +43,29 @@
       const geometry = new THREE.SphereGeometry(1.35, 96, 64);
       const position = geometry.attributes.position;
       const point = new THREE.Vector3();
+      const directions = new Float32Array(position.count * 3);
       for (let index = 0; index < position.count; index += 1) {
         point.fromBufferAttribute(position, index);
         const direction = point.clone().normalize();
-        const ripple = Math.sin(direction.y * 13 + direction.x * 5) * 0.045;
-        const dimples = Math.sin(direction.x * 9) * Math.sin(direction.z * 9) * 0.035;
-        point.copy(direction).multiplyScalar(1.35 + ripple + dimples);
-        position.setXYZ(index, point.x, point.y, point.z);
+        directions[index * 3] = direction.x;
+        directions[index * 3 + 1] = direction.y;
+        directions[index * 3 + 2] = direction.z;
       }
-      geometry.computeVertexNormals();
+
+      const updateSurface = (time = 0) => {
+        for (let index = 0; index < position.count; index += 1) {
+          const x = directions[index * 3];
+          const y = directions[index * 3 + 1];
+          const z = directions[index * 3 + 2];
+          const ripple = Math.sin(y * 10 + x * 4 + time * 0.7) * 0.035;
+          const detail = Math.sin(x * 7 - time * 0.45) * Math.sin(z * 7 + time * 0.35) * 0.022;
+          const radius = 1.35 + ripple + detail;
+          position.setXYZ(index, x * radius, y * radius, z * radius);
+        }
+        position.needsUpdate = true;
+        geometry.computeVertexNormals();
+      };
+      updateSurface();
 
       const materialBall = new THREE.Mesh(
         geometry,
@@ -58,7 +73,7 @@
       );
       materialBall.rotation.set(-0.18, 0.35, 0.08);
       scene.add(materialBall);
-      camera.position.set(0, 0, 5.2);
+      camera.position.set(0, 0, 6.6);
       controls.target.set(0, 0, 0);
       controls.update();
       stage.classList.add('is-loaded');
@@ -78,6 +93,7 @@
       const render = () => {
         requestAnimationFrame(render);
         if (!visible) return;
+        if (!reduceMotion) updateSurface(performance.now() * 0.001);
         controls.update();
         renderer.render(scene, camera);
       };
