@@ -20,6 +20,9 @@
   --corner-size: 16px;
   --corner-offset: -7px;
   --corner-stroke: 2px;
+  --divider-height: 8px;
+  --divider-width: 16px;
+  --divider-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'%3E%3Cpath d='M0 7.5 8 .5l8 7' fill='none' stroke='black'/%3E%3C/svg%3E");
   --social-icon-size: 18px;
   --nav-gap: clamp(20px, 4vw, 44px);
   --mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -223,7 +226,6 @@ h3 {
   margin-top: -40px;
   margin-bottom: clamp(24px, 4vw, 56px);
   overflow: hidden;
-  border-bottom: 1px solid var(--rule);
   background: transparent;
 }
 .unity-strip-window {
@@ -253,8 +255,8 @@ h3 {
   }
 }
 .post-list {
+  position: relative;
   counter-reset: project;
-  border-top: 1px solid var(--ink);
 }
 .post-preview {
   counter-increment: project;
@@ -263,8 +265,34 @@ h3 {
   grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
   gap: clamp(32px, 6vw, 88px);
   padding: clamp(64px, 8vw, 112px) 0;
-  border-bottom: 1px solid var(--ink);
   align-items: center;
+}
+
+.post-preview::after,
+.experience::after,
+.post-list::before,
+.projects::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--divider-height);
+  background: var(--rule);
+  -webkit-mask: var(--divider-mask) left center / var(--divider-width)
+    var(--divider-height) repeat-x;
+  mask: var(--divider-mask) left center / var(--divider-width)
+    var(--divider-height) repeat-x;
+  pointer-events: none;
+}
+
+.post-preview::after,
+.experience::after {
+  bottom: 0;
+}
+
+.post-list::before,
+.projects::before {
+  top: 0;
 }
 .post-preview:nth-child(even) {
   grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.55fr);
@@ -512,12 +540,9 @@ h3 {
   font-size: 1.1rem;
 }
 .projects {
+  position: relative;
   counter-reset: employer;
   margin-top: clamp(88px, 12vw, 152px);
-  border-top: 1px solid var(--ink);
-}
-.experience-list {
-  border-top: 1px solid var(--rule);
 }
 .experience {
   counter-increment: employer;
@@ -526,7 +551,6 @@ h3 {
   grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.6fr);
   gap: clamp(40px, 7vw, 96px);
   padding: clamp(64px, 8vw, 96px) 0;
-  border-bottom: 1px solid var(--ink);
 }
 .experience::before {
   content: "0" counter(employer);
