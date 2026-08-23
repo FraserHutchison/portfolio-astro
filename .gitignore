@@ -1,5 +1,30 @@
+# Dependencies
 node_modules/
-dist/
+
+# Astro and generated site output
 .astro/
+dist/
 public/posts/
+
+# Test and tooling output
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# JetBrains Rider / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Operating system files
 .DS_Store
+Thumbs.db
