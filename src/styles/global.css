@@ -47,7 +47,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .eyebrow { margin: 0 0 12px; color: var(--muted); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; }
 .intro > .eyebrow { display: inline-block; width: max-content; padding: 2px 7px; color: #fff; background: var(--motif); }
 h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
-.intro h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; animation: intro-fade 700ms ease-out both; }
+.intro h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; }
+.intro > *, .about-copy > * { animation: intro-fade 700ms ease-out both; }
 @keyframes intro-fade {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -68,7 +69,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .post-preview:nth-child(even) .preview-media { order: 2; }
 .preview-media { position: relative; overflow: visible; background: #dedad1; aspect-ratio: 16 / 10; }
 .preview-media::before, .preview-media::after { content: ''; position: absolute; z-index: 1; width: 16px; height: 16px; pointer-events: none; }
-.preview-media::before { top: -7px; left: -7px; border-top: 2px solid var(--motif); border-left: 2px solid var(--motif); }
+.preview-media::before { top: -7px; left: -7px; border-top: 2px solid var(--motif-soft); border-left: 2px solid var(--motif-soft); }
 .preview-media::after { right: -7px; bottom: -7px; border-right: 2px solid var(--motif-soft); border-bottom: 2px solid var(--motif-soft); }
 .preview-media img, .preview-media video { width: 100%; height: 100%; object-fit: cover; }
 .preview-content::before { content: 'PROJECT / ' counter(project, decimal-leading-zero); display: block; margin-bottom: 18px; color: var(--motif); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .68rem; letter-spacing: .13em; }
@@ -151,7 +152,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
-  .intro h1 { animation: none; }
+  .intro > *, .about-copy > * { animation: none; }
   .unity-strip-track { animation: none; }
   .unity-icon-group:nth-child(2) { display: none; }
 }
