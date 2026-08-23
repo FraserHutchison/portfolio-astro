@@ -25,6 +25,9 @@ pnpm-debug.log*
 *.iws
 *.ipr
 
+# Other
+*.af~lock~
+
 # Operating system files
 .DS_Store
 Thumbs.db
