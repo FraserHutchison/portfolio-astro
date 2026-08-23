@@ -1,0 +1,97 @@
+<div class="dragon-stage" role="img" aria-label="Interactive 3D model of the Stanford Dragon. Drag to rotate and scroll to zoom.">
+  <div class="dragon-loading" aria-hidden="true">Loading model…</div>
+</div>
+
+<script>
+  const stages = document.querySelectorAll<HTMLElement>('.dragon-stage:not([data-ready])');
+
+  stages.forEach((stage) => {
+    stage.dataset.ready = 'true';
+
+    const start = async () => {
+      const [THREE, { GLTFLoader }, { OrbitControls }] = await Promise.all([
+        import('three'),
+        import('three/examples/jsm/loaders/GLTFLoader.js'),
+        import('three/examples/jsm/controls/OrbitControls.js'),
+      ]);
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(32, 1, 0.01, 100);
+      const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+      renderer.setClearColor(0x000000, 0);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      stage.append(renderer.domElement);
+
+      const controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.enablePan = false;
+      controls.minDistance = 2.2;
+      controls.maxDistance = 6;
+      controls.autoRotate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      controls.autoRotateSpeed = 0.8;
+
+      scene.add(new THREE.HemisphereLight(0xffffff, 0x657079, 2.4));
+      const key = new THREE.DirectionalLight(0xffffff, 3.2);
+      key.position.set(3, 4, 5);
+      scene.add(key);
+      const rim = new THREE.DirectionalLight(0xaab4ba, 2);
+      rim.position.set(-4, 2, -3);
+      scene.add(rim);
+
+      let visible = true;
+
+      new GLTFLoader().load('/models/stanford-dragon.glb', (gltf) => {
+        const dragon = gltf.scene.getObjectByName('Dragon');
+        if (!dragon) return;
+
+        dragon.removeFromParent();
+        scene.add(dragon);
+        dragon.traverse((child) => {
+          if (child instanceof THREE.Mesh) {
+            child.material = new THREE.MeshStandardMaterial({ color: 0x252728, roughness: 0.62, metalness: 0.08 });
+          }
+        });
+
+        const box = new THREE.Box3().setFromObject(dragon);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        dragon.position.sub(center);
+        dragon.rotation.y = -0.35;
+
+        const largest = Math.max(size.x, size.y, size.z);
+        camera.position.set(0, largest * 0.35, largest * 2.25);
+        controls.target.set(0, 0, 0);
+        controls.update();
+        stage.classList.add('is-loaded');
+      });
+
+      const resize = () => {
+        const { width, height } = stage.getBoundingClientRect();
+        if (!width || !height) return;
+        renderer.setSize(width, height, false);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      };
+      new ResizeObserver(resize).observe(stage);
+      resize();
+
+      new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; }).observe(stage);
+
+      const render = () => {
+        requestAnimationFrame(render);
+        if (!visible) return;
+        controls.update();
+        renderer.render(scene, camera);
+      };
+      render();
+    };
+
+    const loadObserver = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      loadObserver.disconnect();
+      void start();
+    }, { rootMargin: '200px' });
+    loadObserver.observe(stage);
+  });
+</script>
