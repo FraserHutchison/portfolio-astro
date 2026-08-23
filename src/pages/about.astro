@@ -1,6 +1,47 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config/site';
+
+const hardlightGames = [
+  {
+    title: 'Sonic Dream Team',
+    platform: 'Apple Arcade',
+    image: '/about/sonic-dream-team.webp',
+    alt: 'Sonic Dream Team cover artwork',
+    url: 'https://apps.apple.com/us/app/sonic-dream-team/id1609094795',
+  },
+  {
+    title: 'Sonic Forces: Speed Battle',
+    platform: 'Mobile',
+    image: '/about/sonic-forces.webp',
+    alt: 'Sonic Forces: Speed Battle cover artwork',
+    url: 'https://play.google.com/store/apps/details?id=com.sega.sprint',
+  },
+  {
+    title: 'Sonic Dash',
+    platform: 'Mobile',
+    image: '/about/sonic-dash.webp',
+    alt: 'Sonic Dash cover artwork',
+    url: 'https://play.google.com/store/apps/details?id=com.sega.sonicdash',
+  },
+  {
+    title: 'Sonic Racing',
+    platform: 'Mobile',
+    image: '/about/sonic-racing.webp',
+    alt: 'Sonic Racing artwork',
+    url: 'https://apps.apple.com/us/app/sonic-racing/id1358659909',
+  },
+];
+
+const frontierGames = [
+  {
+    title: 'F1 Manager 2022',
+    platform: 'PC & Console',
+    image: '/about/f1-manager-2022.png',
+    alt: 'F1 Manager 2022 cover artwork',
+    url: 'https://www.f1manager.com/2022',
+  },
+];
 ---
 <BaseLayout title="About" description="About Fraser Hutchison, a technical artist working in games.">
   <article class="about shell">
@@ -31,22 +72,12 @@ import { SITE } from '../config/site';
             <p class="tenure">February 2022 — Present</p>
           </header>
           <div class="games-list">
-            <article class="game">
-              <img class="game-cover" src="/about/sonic-dream-team.webp" alt="Sonic Dream Team cover artwork" width="1024" height="1024" loading="lazy" />
-              <div><p class="eyebrow">Apple Arcade</p><h4>Sonic Dream Team</h4></div>
-            </article>
-            <article class="game">
-              <img class="game-cover" src="/about/sonic-forces.webp" alt="Sonic Forces: Speed Battle cover artwork" width="1200" height="630" loading="lazy" />
-              <div><p class="eyebrow">Mobile</p><h4>Sonic Forces: Speed Battle</h4></div>
-            </article>
-            <article class="game">
-              <img class="game-cover" src="/about/sonic-dash.webp" alt="Sonic Dash cover artwork" width="1200" height="630" loading="lazy" />
-              <div><p class="eyebrow">Mobile</p><h4>Sonic Dash</h4></div>
-            </article>
-            <article class="game">
-              <img class="game-cover" src="/about/sonic-racing.webp" alt="Sonic Racing artwork" width="1200" height="630" loading="lazy" />
-              <div><p class="eyebrow">Mobile</p><h4>Sonic Racing</h4></div>
-            </article>
+            {hardlightGames.map((game) => (
+              <a class="game" href={game.url} target="_blank" rel="noreferrer">
+                <img class="game-cover" src={game.image} alt={game.alt} width="104" height="104" loading="lazy" />
+                <div><p class="eyebrow">{game.platform}</p><h4>{game.title}</h4></div>
+              </a>
+            ))}
           </div>
         </section>
         <section class="experience" aria-labelledby="frontier-heading">
@@ -58,10 +89,12 @@ import { SITE } from '../config/site';
             <p class="tenure">July 2021 — February 2022</p>
           </header>
           <div class="games-list">
-            <article class="game">
-              <img class="game-cover" src="/about/f1-manager-2022.png" alt="F1 Manager 2022 cover artwork" width="385" height="513" loading="lazy" />
-              <div><p class="eyebrow">PC &amp; Console</p><h4>F1 Manager 2022</h4></div>
-            </article>
+            {frontierGames.map((game) => (
+              <a class="game" href={game.url} target="_blank" rel="noreferrer">
+                <img class="game-cover" src={game.image} alt={game.alt} width="104" height="104" loading="lazy" />
+                <div><p class="eyebrow">{game.platform}</p><h4>{game.title}</h4></div>
+              </a>
+            ))}
           </div>
         </section>
       </div>

@@ -642,6 +642,17 @@ h3 {
   gap: var(--space-3);
   align-items: center;
   min-width: 0;
+  text-decoration: none;
+}
+.game:hover,
+.game:focus-visible {
+  color: var(--ink);
+}
+.game:hover h4,
+.game:focus-visible h4 {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: 0.2em;
 }
 .game-cover {
   width: 104px;
