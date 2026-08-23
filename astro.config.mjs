@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import { unified } from "@astrojs/markdown-remark";
 
 const siteHostname = "fraserh.dev";
 
@@ -32,6 +33,6 @@ export default defineConfig({
   integrations: [mdx()],
   markdown: {
     shikiConfig: { theme: "github-light" },
-    rehypePlugins: [externalLinksInNewTabs],
+    processor: unified({ rehypePlugins: [externalLinksInNewTabs] }),
   },
 });
