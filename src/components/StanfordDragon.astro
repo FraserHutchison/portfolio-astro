@@ -48,11 +48,11 @@
         scene.add(dragon);
         dragon.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshStandardMaterial({ color: 0x252728, roughness: 0.62, metalness: 0.08 });
+            child.material = new THREE.MeshStandardMaterial({ color: 0x45494b, roughness: 0.62, metalness: 0.08, transparent: true, opacity: 0.88 });
           }
         });
 
-        dragon.rotation.y = -0.35;
+        dragon.rotation.y = 0;
         const box = new THREE.Box3().setFromObject(dragon);
         const center = box.getCenter(new THREE.Vector3());
         dragon.position.sub(center);
@@ -61,10 +61,10 @@
         const verticalFov = THREE.MathUtils.degToRad(camera.fov);
         const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
         const limitingFov = Math.min(verticalFov, horizontalFov);
-        const fittedDistance = (sphere.radius / Math.sin(limitingFov / 2)) * 1.16;
+        const fittedDistance = (sphere.radius / Math.sin(limitingFov / 2)) * 1.02;
         camera.near = fittedDistance / 100;
         camera.far = fittedDistance * 100;
-        camera.position.set(0, sphere.radius * 0.12, fittedDistance);
+        camera.position.set(0, 0, fittedDistance);
         camera.updateProjectionMatrix();
         controls.target.set(0, 0, 0);
         controls.update();

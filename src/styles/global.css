@@ -30,8 +30,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .site-nav a:nth-child(2)::before { content: '02'; }
 .header-social { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
 .header-social img { width: 18px; height: 18px; }
-.intro { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 720px) minmax(240px, 1fr); column-gap: clamp(28px, 5vw, 72px); padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); }
-.intro > :not(.dragon-stage) { grid-column: 1; }
+.intro { position: relative; isolation: isolate; min-height: clamp(520px, 50vw, 640px); padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); }
+.intro > :not(.dragon-stage) { position: relative; z-index: 2; max-width: 720px; }
 .intro::before {
   content: '';
   position: absolute;
@@ -55,7 +55,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   to { opacity: 1; }
 }
 .intro-copy { max-width: 620px; margin: 28px 0 18px; font-size: clamp(1.08rem, 2vw, 1.35rem); line-height: 1.5; }
-.dragon-stage { position: relative; grid-column: 2; grid-row: 1 / span 4; align-self: center; width: 100%; min-height: 360px; aspect-ratio: 1; cursor: grab; touch-action: none; }
+.dragon-stage { position: absolute; z-index: 1; top: 50%; right: calc((100vw - 100%) / -2); width: min(58vw, 680px); height: calc(100% - 32px); transform: translateY(-50%); cursor: grab; touch-action: none; }
 .dragon-stage:active { cursor: grabbing; }
 .dragon-stage canvas { width: 100%; height: 100%; outline: none; }
 .dragon-loading { position: absolute; inset: 50% auto auto 50%; transform: translate(-50%, -50%); color: var(--muted); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; transition: opacity 180ms ease; }
@@ -144,8 +144,8 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .post-preview, .post-preview:nth-child(even), .text-only { grid-template-columns: 1fr; gap: 28px; }
   .post-preview:nth-child(even) .preview-media { order: 0; }
   .intro { padding-top: 64px; }
-  .intro { grid-template-columns: 1fr; }
-  .dragon-stage { grid-column: 1; grid-row: auto; justify-self: center; width: min(100%, 340px); min-height: 280px; margin-top: 24px; }
+  .intro { min-height: 0; }
+  .dragon-stage { position: relative; top: auto; right: auto; z-index: 1; width: min(100%, 360px); height: auto; min-height: 300px; margin: 24px auto 0; transform: none; }
   .intro h1 { font-size: clamp(3rem, 17vw, 5rem); }
   .prose img, .prose video, .prose .embed { width: calc(100vw - 32px); }
   .site-footer { flex-direction: column; }
