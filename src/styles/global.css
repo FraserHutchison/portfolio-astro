@@ -56,7 +56,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .unity-strip-window { overflow: hidden; padding: 20px 0 25px; }
 .unity-strip-track { display: flex; width: max-content; animation: unity-scroll 38s linear infinite; }
 .unity-icon-group { display: flex; align-items: center; gap: clamp(38px, 5vw, 72px); padding-right: clamp(38px, 5vw, 72px); }
-.unity-icon-group img { width: clamp(64px, 6vw, 78px); height: clamp(64px, 6vw, 78px); padding: 10px; object-fit: contain; flex: none; border: 1px solid #d5dde1; background: #fff; box-shadow: 5px 5px 0 rgb(39 103 135 / 24%); }
+.unity-icon-group img { width: clamp(48px, 5vw, 66px); height: clamp(48px, 5vw, 66px); object-fit: contain; flex: none; filter: drop-shadow(3px 3px 0 rgb(39 103 135 / 32%)); }
 @keyframes unity-scroll { to { transform: translateX(-50%); } }
 .post-list { counter-reset: project; border-top: 1px solid var(--ink); }
 .post-preview { counter-increment: project; position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(32px, 6vw, 88px); padding: clamp(64px, 8vw, 112px) 0; border-bottom: 1px solid var(--ink); align-items: center; }
@@ -73,7 +73,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .preview-content p { margin: 0 0 24px; color: var(--muted); }
 .preview-content time { display: inline-block; padding-top: 8px; border-top: 1px solid var(--ink); color: var(--muted); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .72rem; letter-spacing: .08em; }
 .text-only { grid-template-columns: minmax(0, 760px); }
-.site-footer { display: flex; justify-content: space-between; gap: 24px; padding: 48px 0 64px; color: var(--muted); font-size: .85rem; }
+.site-footer { display: flex; justify-content: space-between; gap: 24px; padding: 48px 0 64px; color: var(--ink); font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: .78rem; letter-spacing: .04em; text-transform: uppercase; }
 .footer-identity { display: grid; justify-items: start; gap: 8px; }
 .article-head { position: relative; isolation: isolate; width: min(100%, var(--prose)); margin: clamp(64px, 10vw, 128px) auto clamp(64px, 9vw, 112px); padding-block: clamp(32px, 5vw, 64px); }
 .article-head::before { content: ''; position: absolute; z-index: -1; inset-block: 0; left: 50%; width: 100vw; transform: translateX(-50%); background-image: linear-gradient(to right, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px), linear-gradient(to bottom, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px); background-size: 40px 40px; }
