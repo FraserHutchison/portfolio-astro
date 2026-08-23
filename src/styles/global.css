@@ -183,14 +183,15 @@ a:focus-visible {
   color: transparent;
   background-image: linear-gradient(
     110deg,
-    var(--on-dark) 35%,
-    var(--muted) 50%,
-    var(--on-dark) 65%
+    var(--on-dark) 42%,
+    var(--link) 50%,
+    var(--on-dark) 58%
   );
-  background-size: 250% 100%;
+  background-size: 300% 100%;
+  background-repeat: no-repeat;
   background-clip: text;
   -webkit-background-clip: text;
-  animation: eyebrow-shimmer 3.5s ease-in-out infinite;
+  animation: eyebrow-shimmer 4s linear infinite;
 }
 h1,
 h2,
@@ -218,11 +219,12 @@ h3 {
 }
 @keyframes eyebrow-shimmer {
   0%,
-  55% {
+  35% {
     background-position: 100% 50%;
   }
+  65%,
   100% {
-    background-position: -100% 50%;
+    background-position: 0% 50%;
   }
 }
 .intro > .intro-copy {
