@@ -3,14 +3,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="About" description="About Fraser Hutchison, a technical artist working in games.">
   <article class="about shell">
-    <p class="eyebrow">About</p>
-    <h1>Technical art in service of the picture.</h1>
-    <p>I’m Fraser Hutchison, a technical artist working across rendering, shaders, optimisation and art tools for games.</p>
-    <p>My work sits between art and engineering: building visual systems, helping artists work efficiently, and finding practical ways to make ambitious visuals perform across a wide range of hardware.</p>
-    <p>I’ve worked on projects including <em>Sonic Dream Team</em>, with a particular focus on Unity, URP, mobile rendering and production-friendly shader workflows.</p>
-    <div class="links">
-      <a href="https://github.com/FraserHutchison">GitHub</a>
-      <a href="https://www.linkedin.com/in/fraser-hutchison/">LinkedIn</a>
-    </div>
+    <section class="about-intro">
+      <img class="profile-picture" src="/about/profile-picture.jpg" alt="Fraser Hutchison" width="512" height="512" />
+      <div class="about-copy">
+        <p class="eyebrow">About</p>
+        <h1>Technical art in service of the picture.</h1>
+        <p>I’m Fraser Hutchison, a technical artist working across rendering, shaders, optimisation and art tools for games.</p>
+        <p>My work sits between art and engineering: building visual systems, helping artists work efficiently, and finding practical ways to make ambitious visuals perform across a wide range of hardware.</p>
+        <p>My professional work includes projects at SEGA HARDlight and Frontier Developments, with a particular focus on Unity, URP, mobile rendering and production-friendly shader workflows.</p>
+        <div class="links">
+          <a href="https://github.com/FraserHutchison">GitHub</a>
+          <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/">LinkedIn</a>
+          <a href="https://www.artstation.com/fraserhutchison">ArtStation</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="projects" aria-labelledby="projects-heading">
+      <header class="projects-head">
+        <h2 id="projects-heading">Selected projects</h2>
+        <p>Games I’ve contributed to professionally.</p>
+      </header>
+      <div class="project-grid">
+        <article class="project">
+          <img class="project-cover" src="/about/sonic-dream-team.jpg" alt="Sonic Dream Team cover artwork" width="1024" height="1024" loading="lazy" />
+          <div class="project-info">
+            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
+            <h3>Sonic Dream Team</h3>
+            <p>Technical Artist</p>
+          </div>
+        </article>
+        <article class="project">
+          <img class="project-cover" src="/about/sonic-forces.png" alt="Sonic Forces: Speed Battle cover artwork" width="1200" height="630" loading="lazy" />
+          <div class="project-info">
+            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
+            <h3>Sonic Forces: Speed Battle</h3>
+            <p>Technical Artist</p>
+          </div>
+        </article>
+        <article class="project">
+          <img class="project-cover" src="/about/sonic-dash.png" alt="Sonic Dash cover artwork" width="1200" height="630" loading="lazy" />
+          <div class="project-info">
+            <div class="company"><img src="/about/sega-hardlight.png" alt="" /><span>SEGA HARDlight</span></div>
+            <h3>Sonic Dash</h3>
+            <p>Technical Artist</p>
+          </div>
+        </article>
+        <article class="project">
+          <img class="project-cover" src="/about/f1-manager-2022.png" alt="F1 Manager 2022 cover artwork" width="385" height="513" loading="lazy" />
+          <div class="project-info">
+            <div class="company"><img src="/about/frontier-developments.png" alt="" /><span>Frontier Developments</span></div>
+            <h3>F1 Manager 2022</h3>
+            <p>3D Artist</p>
+          </div>
+        </article>
+      </div>
+    </section>
   </article>
 </BaseLayout>
