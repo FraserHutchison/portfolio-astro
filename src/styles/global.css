@@ -21,8 +21,7 @@
   --grid-line: 1px;
   --grid-color: color-mix(in srgb, var(--ink) 8%, transparent);
   --corner-size: 16px;
-  --corner-offset: -7px;
-  --preview-corner-offset: -11px;
+  --corner-offset: -11px;
   --corner-stroke: 2px;
   --divider-height: 8px;
   --divider-width: 16px;
@@ -331,14 +330,14 @@ h3 {
   pointer-events: none;
 }
 .preview-media::before {
-  top: var(--preview-corner-offset);
-  left: var(--preview-corner-offset);
+  top: var(--corner-offset);
+  left: var(--corner-offset);
   border-top: var(--corner-stroke) solid var(--motif);
   border-left: var(--corner-stroke) solid var(--motif);
 }
 .preview-media::after {
-  right: var(--preview-corner-offset);
-  bottom: var(--preview-corner-offset);
+  right: var(--corner-offset);
+  bottom: var(--corner-offset);
   border-right: var(--corner-stroke) solid var(--motif);
   border-bottom: var(--corner-stroke) solid var(--motif);
 }
