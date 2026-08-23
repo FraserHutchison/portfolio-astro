@@ -48,7 +48,7 @@
         scene.add(dragon);
         dragon.traverse((child) => {
           if (child instanceof THREE.Mesh) {
-            child.material = new THREE.MeshToonMaterial({ color: 0xc8bda9 });
+            child.material = new THREE.MeshLambertMaterial({ color: 0x8b8f91 });
           }
         });
 
