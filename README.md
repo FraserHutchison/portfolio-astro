@@ -2,8 +2,10 @@
 
 Technical-art portfolio, built with Astro and deployed to GitHub Pages.
 
-<summary>
-## Add a post
+https://fraserh.dev/
+
+<details>
+<summary>Add a post</summary>
 
 1. Duplicate a folder in `src/content/posts`.
 2. Rename the folder to the new post slug.
@@ -18,10 +20,10 @@ Normal images use Markdown: `![Description](./image.webp)`.
 - Pinned posts appear first without a label. Set `pinned: true` and `pinOrder: 1` in frontmatter. All other posts are newest-first.
 
 - Set `draft: true` to keep an unfinished post and its legacy redirect out of the generated site.
-</summary>
+</details>
 
-<summary>
-## Asset guide
+<details>
+<summary>Asset guide</summary>
 
 Keep post-specific media beside that post's `index.mdx`. Export images at the sizes below before adding them to the repository; Astro will create smaller responsive versions where appropriate.
 
@@ -61,7 +63,7 @@ For longer or narrated videos, use controls:
 ```
 
 Use YouTube for long videos when repository size or streaming bandwidth would otherwise become significant.
-</summary>
+</details>
 
 ## Local preview
 
