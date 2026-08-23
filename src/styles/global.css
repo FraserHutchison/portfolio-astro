@@ -26,6 +26,14 @@
   --divider-height: 8px;
   --divider-width: 16px;
   --divider-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8' viewBox='0 0 16 8'%3E%3Cpath d='M0 7.5 8 .5l8 7' fill='none' stroke='black'/%3E%3C/svg%3E");
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --hero-padding: clamp(48px, 7vw, 88px);
+  --section-padding: clamp(64px, 8vw, 112px);
   --section-divider-gap: clamp(32px, 4vw, 56px);
   --social-icon-size: 18px;
   --nav-gap: clamp(20px, 4vw, 44px);
@@ -131,7 +139,7 @@ a:focus-visible {
 .header-social {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-1);
   text-decoration: none;
 }
 .header-social img {
@@ -142,7 +150,7 @@ a:focus-visible {
   position: relative;
   isolation: isolate;
   min-height: clamp(520px, 50vw, 640px);
-  padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px);
+  padding: var(--hero-padding) 0;
 }
 .intro > :not(.hero-artwork) {
   position: relative;
@@ -155,7 +163,7 @@ a:focus-visible {
   background-size: var(--grid-size) var(--grid-size);
 }
 .eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 var(--space-2);
   color: var(--muted);
   font-family: var(--mono);
   font-size: 0.72rem;
@@ -197,7 +205,7 @@ h3 {
 }
 .intro > .intro-copy {
   max-width: 500px;
-  margin: 28px 0 18px;
+  margin: var(--space-4) 0 var(--space-3);
   font-size: clamp(1.08rem, 2vw, 1.35rem);
   line-height: 1.5;
 }
@@ -215,12 +223,12 @@ h3 {
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 24px;
+  gap: var(--space-2) var(--space-3);
 }
 .links a {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--space-1);
 }
 .links img {
   width: var(--social-icon-size);
@@ -235,7 +243,7 @@ h3 {
 }
 .unity-strip-window {
   overflow: hidden;
-  padding: 20px 0 25px;
+  padding: var(--space-3) 0;
 }
 .unity-strip-track {
   display: flex;
@@ -270,7 +278,7 @@ h3 {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.75fr);
   gap: clamp(32px, 6vw, 88px);
-  padding: clamp(64px, 8vw, 112px) 0;
+  padding: var(--section-padding) 0;
   align-items: center;
 }
 
@@ -342,14 +350,14 @@ h3 {
 .preview-content::before {
   content: "PROJECT / " counter(project, decimal-leading-zero);
   display: block;
-  margin-bottom: 18px;
+  margin-bottom: var(--space-2);
   color: var(--motif);
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.13em;
 }
 .preview-content h2 {
-  margin: 0 0 16px;
+  margin: 0 0 var(--space-2);
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 650;
 }
@@ -357,12 +365,12 @@ h3 {
   text-decoration: none;
 }
 .preview-content p {
-  margin: 0 0 24px;
+  margin: 0 0 var(--space-3);
   color: var(--muted);
 }
 .preview-content time {
   display: inline-block;
-  padding-top: 8px;
+  padding-top: var(--space-1);
   border-top: 1px solid var(--ink);
   color: var(--muted);
   font-family: var(--mono);
@@ -375,10 +383,10 @@ h3 {
 .site-footer {
   display: flex;
   justify-content: space-between;
-  gap: 24px;
+  gap: var(--space-3);
   margin-top: var(--section-divider-gap);
   border-top: 1px solid var(--rule);
-  padding: 48px 0 64px;
+  padding: var(--space-5) 0 var(--space-6);
   color: var(--ink);
   font-family: var(--mono);
   font-size: 0.78rem;
@@ -388,14 +396,14 @@ h3 {
 .footer-identity {
   display: grid;
   justify-items: start;
-  gap: 8px;
+  gap: var(--space-1);
 }
 .article-head {
   position: relative;
   isolation: isolate;
   width: min(100%, var(--prose));
-  margin: var(--section-divider-gap) auto clamp(64px, 9vw, 112px);
-  padding-block: clamp(32px, 5vw, 64px);
+  margin: 0 auto var(--section-divider-gap);
+  padding-block: var(--hero-padding);
 }
 .article-head::before {
   content: "";
@@ -418,7 +426,7 @@ h3 {
   font: 700 1.1rem/1 var(--mono);
 }
 .article-head h1 {
-  margin: 12px 0 24px;
+  margin: var(--space-2) 0 var(--space-3);
   font-size: clamp(2.8rem, 7vw, 6rem);
   font-weight: 700;
   letter-spacing: -0.055em;
@@ -444,7 +452,6 @@ h3 {
 .article-end {
   width: min(100%, var(--prose));
   margin-inline: auto;
-  padding-bottom: var(--section-divider-gap);
   text-align: right;
 }
 
@@ -495,7 +502,7 @@ h3 {
 }
 .prose pre {
   overflow-x: auto;
-  padding: 20px;
+  padding: var(--space-3);
   border: 1px solid var(--rule);
   font-size: 0.85rem;
 }
@@ -513,8 +520,8 @@ h3 {
   background: var(--dark-media);
 }
 .about {
-  --grid-bleed: clamp(48px, 7vw, 88px);
-  padding: clamp(48px, 7vw, 88px) 0 clamp(64px, 10vw, 128px);
+  --grid-bleed: var(--hero-padding);
+  padding: var(--hero-padding) 0 0;
 }
 .about-intro {
   position: relative;
@@ -567,7 +574,7 @@ h3 {
   object-fit: cover;
 }
 .about-copy h1 {
-  margin: 0 0 32px;
+  margin: 0 0 var(--space-4);
   font-size: clamp(3.1rem, 8vw, 7rem);
   font-weight: 700;
   letter-spacing: -0.065em;
@@ -586,12 +593,12 @@ h3 {
   display: grid;
   grid-template-columns: minmax(220px, 0.65fr) minmax(0, 1.6fr);
   gap: clamp(40px, 7vw, 96px);
-  padding: clamp(64px, 8vw, 96px) 0;
+  padding: var(--section-padding) 0;
 }
 .experience::before {
   content: "0" counter(employer);
   position: absolute;
-  top: 18px;
+  top: var(--space-2);
   left: 0;
   color: var(--motif);
   font-family: var(--mono);
@@ -603,7 +610,7 @@ h3 {
 }
 .company-lockup {
   display: flex;
-  gap: 18px;
+  gap: var(--space-2);
   align-items: center;
 }
 .company-lockup > img {
@@ -621,18 +628,18 @@ h3 {
   color: var(--muted);
 }
 .tenure {
-  margin: 18px 0 0 70px;
+  margin: var(--space-3) 0 0 68px;
   font-size: 0.86rem;
 }
 .games-list {
   display: grid;
   align-content: start;
-  gap: 16px;
+  gap: var(--space-2);
 }
 .game {
   display: grid;
   grid-template-columns: 104px minmax(0, 1fr);
-  gap: 24px;
+  gap: var(--space-3);
   align-items: center;
   min-width: 0;
 }
@@ -665,19 +672,16 @@ h3 {
   .post-preview:nth-child(even),
   .text-only {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: var(--space-4);
   }
   .post-preview:nth-child(even) .preview-media {
     order: 0;
   }
   .intro {
-    padding-top: 64px;
-  }
-  .intro {
     min-height: 0;
   }
   .unity-strip {
-    margin-top: -24px;
+    margin-top: calc(var(--space-3) * -1);
   }
   .hero-artwork {
     display: none;
@@ -702,7 +706,7 @@ h3 {
   }
   .experience {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: var(--space-4);
   }
 }
 @media (max-width: 440px) {
@@ -711,7 +715,7 @@ h3 {
   }
   .game {
     grid-template-columns: 88px minmax(0, 1fr);
-    gap: 18px;
+    gap: var(--space-2);
   }
   .game-cover {
     width: 88px;
