@@ -19,7 +19,7 @@ a { color: inherit; text-decoration-color: color-mix(in srgb, currentColor 45%, 
 a:hover { color: var(--accent); }
 a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .shell { width: min(calc(100% - 48px), var(--page)); margin-inline: auto; }
-.site-header { display: flex; align-items: center; justify-content: space-between; min-height: 112px; border-bottom: 1px solid var(--rule); }
+.site-header { display: flex; align-items: center; justify-content: flex-end; min-height: 112px; border-bottom: 1px solid var(--rule); }
 .site-name { font-weight: 650; letter-spacing: -.02em; text-decoration: none; }
 .site-nav { display: flex; align-items: center; gap: clamp(20px, 4vw, 44px); }
 .site-nav a { text-decoration: none; }
@@ -32,8 +32,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .links a { display: inline-flex; align-items: center; gap: 8px; }
 .links img { width: 18px; height: 18px; object-fit: contain; }
 .unity-strip { margin-bottom: clamp(24px, 4vw, 56px); overflow: hidden; border-block: 1px solid var(--rule); background: color-mix(in srgb, white 20%, var(--paper)); }
-.unity-strip-label { padding-top: 14px; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
-.unity-strip-window { overflow: hidden; padding: 20px 0 24px; }
+.unity-strip-window { overflow: hidden; padding: 24px 0; }
 .unity-strip-track { display: flex; width: max-content; animation: unity-scroll 38s linear infinite; }
 .unity-icon-group { display: flex; align-items: center; gap: clamp(38px, 5vw, 72px); padding-right: clamp(38px, 5vw, 72px); }
 .unity-icon-group img { width: clamp(42px, 5vw, 66px); height: clamp(42px, 5vw, 66px); object-fit: contain; flex: none; }
