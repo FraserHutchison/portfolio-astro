@@ -12,6 +12,9 @@
   --accent: var(--link);
   --motif: var(--ink);
   --motif-soft: #929ca2;
+  --gold-dark: #8a5a00;
+  --gold-mid: #d7a928;
+  --gold-light: #fff1a8;
 
   --page: 1160px;
   --prose: 760px;
@@ -179,18 +182,38 @@ a:focus-visible {
   background: var(--motif);
   font-size: 1.1rem;
 }
+.intro > .eyebrow {
+  background-color: var(--gold-mid);
+  background-image: linear-gradient(
+    135deg,
+    var(--gold-dark) 0%,
+    var(--gold-mid) 28%,
+    var(--gold-light) 50%,
+    var(--gold-mid) 72%,
+    var(--gold-dark) 100%
+  );
+}
 .intro > .eyebrow span {
+  position: relative;
+  display: inline-block;
+  color: var(--on-dark);
+}
+.intro > .eyebrow span::after {
+  position: absolute;
+  inset: 0;
   color: transparent;
+  content: attr(data-label);
   background-image: linear-gradient(
     110deg,
-    var(--on-dark) 42%,
-    var(--link) 50%,
-    var(--on-dark) 58%
+    transparent 42%,
+    var(--on-dark) 50%,
+    transparent 58%
   );
   background-size: 300% 100%;
   background-repeat: no-repeat;
   background-clip: text;
   -webkit-background-clip: text;
+  filter: drop-shadow(0 0 2px var(--on-dark));
   animation: eyebrow-shimmer 4s linear infinite;
 }
 h1,
@@ -754,11 +777,8 @@ h3 {
   }
   .intro > *,
   .about-copy > *,
-  .intro > .eyebrow span {
+  .intro > .eyebrow span::after {
     animation: none;
-  }
-  .intro > .eyebrow span {
-    color: var(--on-dark);
   }
   .unity-strip-track {
     animation: none;

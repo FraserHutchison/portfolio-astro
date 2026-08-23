@@ -11,7 +11,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(sor
 <BaseLayout>
   <div class="hero-grid">
     <section class="intro shell">
-      <p class="eyebrow"><span>Technical Artist</span></p>
+      <p class="eyebrow"><span data-label="Technical Artist">Technical Artist</span></p>
       <h1>Fraser Hutchison</h1>
       <p class="intro-copy">Technical artist specialising in Unity and URP rendering, shader development, mobile optimisation, and production tools for artists.</p>
       <div class="links">
