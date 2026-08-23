@@ -253,7 +253,7 @@ h3 {
 }
 @keyframes unity-scroll {
   to {
-    transform: translateX(-50%);
+    transform: translate3d(calc(-100% / 3), 0, 0);
   }
 }
 .post-list {

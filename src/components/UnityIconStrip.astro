@@ -1,12 +1,13 @@
 ---
-const icons = Array.from({ length: 10 }, (_, index) =>
-  `/unity-icons/background-img-${String(index + 1).padStart(2, '0')}.png`
+const iconOrder = [7, 2, 10, 4, 1, 9, 5, 8, 3, 6];
+const icons = iconOrder.map(
+  (number) => `/unity-icons/background-img-${String(number).padStart(2, '0')}.png`
 );
 ---
 <section class="unity-strip" aria-label="Unity technical art tools">
   <div class="unity-strip-window">
     <div class="unity-strip-track">
-      {[0, 1].map(() => (
+      {[0, 1, 2].map(() => (
         <div class="unity-icon-group" aria-hidden="true">
           {icons.map((src) => (
             <img src={src} alt="" width="256" height="256" loading="lazy" />
