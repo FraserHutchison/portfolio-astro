@@ -20,34 +20,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a,
         <a href="https://github.com/FraserHutchison"><img src="/icons/github.svg" alt="" />GitHub</a>
         <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/"><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
       </div>
-      <div class="hero-graphic" aria-hidden="true">
-        <svg viewBox="0 0 520 520" focusable="false">
-          <g class="diagram-fine">
-            <circle cx="286" cy="252" r="156" />
-            <circle cx="286" cy="252" r="116" />
-            <circle cx="286" cy="252" r="76" />
-            <path d="M66 252h404M286 32v440" />
-            <path d="M176 142 396 362M396 142 176 362" />
-          </g>
-          <g class="diagram-heavy">
-            <path d="M166 252c0-78 48-132 120-132 83 0 134 54 134 132 0 82-51 136-134 136-72 0-120-54-120-136Z" />
-            <path d="M196 252c0-61 35-102 90-102 64 0 104 41 104 102 0 63-40 106-104 106-55 0-90-43-90-106Z" />
-            <path d="M230 252c0-38 22-66 56-66 42 0 70 28 70 66 0 42-28 70-70 70-34 0-56-28-56-70Z" />
-          </g>
-          <g class="diagram-marks">
-            <path d="M52 70h28M66 56v28M432 426h28M446 412v28" />
-            <rect x="96" y="104" width="8" height="8" /><rect x="112" y="104" width="8" height="8" /><rect x="128" y="104" width="8" height="8" />
-            <rect x="96" y="120" width="8" height="8" /><rect x="112" y="120" width="8" height="8" /><rect x="128" y="120" width="8" height="8" />
-          </g>
-          <g class="diagram-type">
-            <text x="48" y="48">SURFACE / 01</text>
-            <text x="382" y="92">X 0.84</text>
-            <text x="382" y="110">Y 0.52</text>
-            <text x="382" y="128">Z 1.00</text>
-            <text x="48" y="478">NORMAL FIELD</text>
-          </g>
-        </svg>
-      </div>
+      <img class="hero-artwork" src="/hero-artwork.svg" alt="" width="1200" height="1200" />
     </section>
     <UnityIconStrip />
   </div>

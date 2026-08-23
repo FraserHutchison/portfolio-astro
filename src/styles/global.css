@@ -33,7 +33,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .header-social { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
 .header-social img { width: 18px; height: 18px; }
 .intro { position: relative; isolation: isolate; min-height: clamp(520px, 50vw, 640px); padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); }
-.intro > :not(.hero-graphic) { position: relative; z-index: 2; max-width: 720px; }
+.intro > :not(.hero-artwork) { position: relative; z-index: 2; max-width: 720px; }
 .hero-grid {
   background-image:
     linear-gradient(to right, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px),
@@ -50,12 +50,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   to { opacity: 1; }
 }
 .intro-copy { max-width: 620px; margin: 28px 0 18px; font-size: clamp(1.08rem, 2vw, 1.35rem); line-height: 1.5; }
-.hero-graphic { position: absolute; z-index: 1; top: 50%; right: 0; width: min(45vw, 520px); transform: translateY(-50%); color: var(--ink); opacity: .58; pointer-events: none; }
-.hero-graphic svg { display: block; width: 100%; height: auto; overflow: visible; }
-.diagram-fine { fill: none; stroke: currentColor; stroke-width: 1; opacity: .36; }
-.diagram-heavy { fill: none; stroke: currentColor; stroke-width: 2; }
-.diagram-marks { fill: currentColor; stroke: currentColor; stroke-width: 2; }
-.diagram-type { fill: currentColor; font: 11px ui-monospace, "SFMono-Regular", Menlo, monospace; letter-spacing: 2px; }
+.hero-artwork { position: absolute; z-index: 1; top: 50%; right: 0; width: min(45vw, 520px); aspect-ratio: 1; transform: translateY(-50%); object-fit: contain; pointer-events: none; }
 .links { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .links a { display: inline-flex; align-items: center; gap: 8px; }
 .links img { width: 18px; height: 18px; object-fit: contain; }
@@ -69,7 +64,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .unity-strip-window { overflow: hidden; padding: 20px 0 25px; }
 .unity-strip-track { display: flex; width: max-content; animation: unity-scroll 38s linear infinite; }
 .unity-icon-group { display: flex; align-items: center; gap: clamp(38px, 5vw, 72px); padding-right: clamp(38px, 5vw, 72px); }
-.unity-icon-group img { width: clamp(48px, 5vw, 66px); height: clamp(48px, 5vw, 66px); object-fit: contain; flex: none; filter: drop-shadow(3px 3px 0 rgb(23 23 20 / 24%)); }
+.unity-icon-group img { width: clamp(48px, 5vw, 66px); height: clamp(48px, 5vw, 66px); object-fit: contain; flex: none; }
 @keyframes unity-scroll { to { transform: translateX(-50%); } }
 .post-list { counter-reset: project; border-top: 1px solid var(--ink); }
 .post-preview { counter-increment: project; position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(32px, 6vw, 88px); padding: clamp(64px, 8vw, 112px) 0; border-bottom: 1px solid var(--ink); align-items: center; }
@@ -135,12 +130,13 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .experience-heading { align-self: start; }
 .company-lockup { display: flex; gap: 18px; align-items: center; }
 .company-lockup > img { width: 52px; height: 52px; object-fit: contain; }
+.company-lockup > img.frontier-logo { filter: brightness(0); }
 .company-lockup h3 { margin: 0 0 3px; font-size: 1.5rem; }
 .company-lockup p, .tenure { margin: 0; color: var(--muted); }
 .tenure { margin: 18px 0 0 70px; font-size: .86rem; }
 .games-list { display: grid; align-content: start; gap: 16px; }
 .game { display: grid; grid-template-columns: 104px minmax(0, 1fr); gap: 24px; align-items: center; min-width: 0; }
-.game-cover { width: 104px; height: 88px; object-fit: cover; background: #d8dde0; }
+.game-cover { width: 104px; height: 104px; object-fit: cover; background: #d8dde0; }
 .game > div { padding: 0; }
 .game h4 { margin: 0; font-size: clamp(1.15rem, 2vw, 1.55rem); letter-spacing: -.025em; }
 .game .eyebrow { margin-bottom: 7px; font-size: .68rem; }
@@ -152,7 +148,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .intro { padding-top: 64px; }
   .intro { min-height: 0; }
   .unity-strip { margin-top: -24px; }
-  .hero-graphic { position: relative; top: auto; right: auto; width: min(82vw, 340px); margin: 32px auto 0; transform: none; }
+  .hero-artwork { position: relative; top: auto; right: auto; width: min(82vw, 340px); margin: 32px auto 0; transform: none; }
   .intro h1 { font-size: clamp(3rem, 17vw, 5rem); }
   .prose img, .prose video, .prose .embed { width: calc(100vw - 32px); }
   .site-footer { flex-direction: column; }
@@ -163,7 +159,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 @media (max-width: 440px) {
   .tenure { margin-left: 0; }
   .game { grid-template-columns: 88px minmax(0, 1fr); gap: 18px; }
-  .game-cover { width: 88px; height: 76px; }
+  .game-cover { width: 88px; height: 88px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
