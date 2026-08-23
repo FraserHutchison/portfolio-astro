@@ -26,8 +26,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .site-nav { display: flex; align-items: center; gap: clamp(20px, 4vw, 44px); }
 .site-nav a { display: inline-flex; gap: 7px; text-decoration: none; }
 .site-nav a::before { color: var(--motif); font-size: .68em; }
-.site-nav a:first-child::before { content: '01'; }
-.site-nav a:nth-child(2)::before { content: '02'; }
+.site-nav .home-link::before { content: '01'; }
+.site-nav .about-link::before { content: '02'; }
+.site-nav .home-mark { margin-right: calc(clamp(20px, 4vw, 44px) * -.55); }
+.site-nav .home-mark img { width: 24px; height: 24px; object-fit: contain; }
 .header-social { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
 .header-social img { width: 18px; height: 18px; }
 .intro { position: relative; isolation: isolate; min-height: clamp(520px, 50vw, 640px); padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); }
@@ -119,6 +121,10 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
     linear-gradient(to bottom, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px);
   background-size: 40px 40px;
 }
+.profile-frame { position: relative; }
+.profile-frame::before, .profile-frame::after { content: ''; position: absolute; z-index: 1; width: 16px; height: 16px; pointer-events: none; }
+.profile-frame::before { top: -7px; left: -7px; border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+.profile-frame::after { right: -7px; bottom: -7px; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
 .profile-picture { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .about-copy h1 { margin: 0 0 32px; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; }
 .about-copy p { font-size: 1.1rem; }
@@ -151,7 +157,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .prose img, .prose video, .prose .embed { width: calc(100vw - 32px); }
   .site-footer { flex-direction: column; }
   .about-intro { grid-template-columns: 1fr; }
-  .profile-picture { width: min(72vw, 320px); }
+  .profile-frame { width: min(72vw, 320px); }
   .experience { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (max-width: 440px) {
