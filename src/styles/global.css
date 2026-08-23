@@ -64,9 +64,10 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .links a { display: inline-flex; align-items: center; gap: 8px; }
 .links img { width: 18px; height: 18px; object-fit: contain; }
 .unity-strip {
+  margin-top: -40px;
   margin-bottom: clamp(24px, 4vw, 56px);
   overflow: hidden;
-  border-block: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
   background-color: var(--paper);
   background-image:
     linear-gradient(to right, color-mix(in srgb, var(--ink) 8%, transparent) 1px, transparent 1px),
@@ -154,6 +155,7 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .post-preview:nth-child(even) .preview-media { order: 0; }
   .intro { padding-top: 64px; }
   .intro { min-height: 0; }
+  .unity-strip { margin-top: -24px; }
   .dragon-stage { position: relative; top: auto; right: auto; z-index: 1; width: min(100%, 360px); height: auto; min-height: 300px; margin: 24px auto 0; transform: none; }
   .intro h1 { font-size: clamp(3rem, 17vw, 5rem); }
   .prose img, .prose video, .prose .embed { width: calc(100vw - 32px); }
