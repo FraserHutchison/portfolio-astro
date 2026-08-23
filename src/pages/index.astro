@@ -12,17 +12,19 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort((a,
 });
 ---
 <BaseLayout>
-  <section class="intro shell">
-    <p class="eyebrow">Technical Artist</p>
-    <h1>Fraser Hutchison</h1>
-    <p class="intro-copy">Technical artist specialising in Unity and URP rendering, shader development, mobile optimisation, and production tools for artists.</p>
-    <div class="links">
-      <a href="https://github.com/FraserHutchison"><img src="/icons/github.svg" alt="" />GitHub</a>
-      <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/"><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
-    </div>
-    <StanfordDragon />
-  </section>
-  <UnityIconStrip />
+  <div class="hero-grid">
+    <section class="intro shell">
+      <p class="eyebrow">Technical Artist</p>
+      <h1>Fraser Hutchison</h1>
+      <p class="intro-copy">Technical artist specialising in Unity and URP rendering, shader development, mobile optimisation, and production tools for artists.</p>
+      <div class="links">
+        <a href="https://github.com/FraserHutchison"><img src="/icons/github.svg" alt="" />GitHub</a>
+        <a href="https://www.linkedin.com/in/fraser-hutchison-011b0b178/"><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
+      </div>
+      <StanfordDragon />
+    </section>
+    <UnityIconStrip />
+  </div>
   <section class="post-list shell" aria-label="Selected work and articles">
     {posts.map((post) => <PostPreview post={post} />)}
   </section>
