@@ -52,11 +52,11 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .links { display: flex; flex-wrap: wrap; gap: 12px 24px; }
 .links a { display: inline-flex; align-items: center; gap: 8px; }
 .links img { width: 18px; height: 18px; object-fit: contain; }
-.unity-strip { margin-bottom: clamp(24px, 4vw, 56px); overflow: hidden; border-block: 1px solid #aebbc2; background: #cfd8dd; }
+.unity-strip { margin-bottom: clamp(24px, 4vw, 56px); overflow: hidden; border-block: 1px solid var(--rule); background: #f4f6f7; }
 .unity-strip-window { overflow: hidden; padding: 24px 0; }
 .unity-strip-track { display: flex; width: max-content; animation: unity-scroll 38s linear infinite; }
 .unity-icon-group { display: flex; align-items: center; gap: clamp(38px, 5vw, 72px); padding-right: clamp(38px, 5vw, 72px); }
-.unity-icon-group img { width: clamp(42px, 5vw, 66px); height: clamp(42px, 5vw, 66px); object-fit: contain; flex: none; }
+.unity-icon-group img { width: clamp(42px, 5vw, 66px); height: clamp(42px, 5vw, 66px); object-fit: contain; flex: none; filter: drop-shadow(5px 5px 0 rgb(39 103 135 / 18%)); }
 @keyframes unity-scroll { to { transform: translateX(-50%); } }
 .post-list { counter-reset: project; border-top: 1px solid var(--ink); }
 .post-preview { counter-increment: project; position: relative; display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(32px, 6vw, 88px); padding: clamp(64px, 8vw, 112px) 0; border-bottom: 1px solid var(--ink); align-items: center; }
