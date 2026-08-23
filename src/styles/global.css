@@ -21,6 +21,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .shell { width: min(calc(100% - 48px), var(--page)); margin-inline: auto; }
 .site-header { display: flex; align-items: center; justify-content: space-between; min-height: 112px; border-bottom: 1px solid var(--rule); }
 .site-name { font-weight: 650; letter-spacing: -.02em; text-decoration: none; }
+.site-nav { display: flex; align-items: center; gap: clamp(20px, 4vw, 44px); }
 .site-nav a { text-decoration: none; }
 .intro { padding: clamp(64px, 9vw, 128px) 0 clamp(56px, 8vw, 112px); max-width: 780px; }
 .eyebrow { margin: 0 0 12px; color: var(--muted); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; }
