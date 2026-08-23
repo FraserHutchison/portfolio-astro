@@ -1,4 +1,4 @@
-<div class="dragon-stage" role="img" aria-label="Interactive 3D model of the Stanford Dragon. Drag to rotate and scroll to zoom.">
+<div class="dragon-stage" role="img" aria-label="Interactive 3D model of the Stanford Dragon. Drag to rotate.">
   <div class="dragon-loading" aria-hidden="true">Loading model…</div>
 </div>
 
@@ -26,8 +26,7 @@
       const controls = new OrbitControls(camera, renderer.domElement);
       controls.enableDamping = true;
       controls.enablePan = false;
-      controls.minDistance = 2.2;
-      controls.maxDistance = 6;
+      controls.enableZoom = false;
       controls.autoRotate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       controls.autoRotateSpeed = 0.8;
 
@@ -53,14 +52,20 @@
           }
         });
 
+        dragon.rotation.y = -0.35;
         const box = new THREE.Box3().setFromObject(dragon);
         const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
         dragon.position.sub(center);
-        dragon.rotation.y = -0.35;
 
-        const largest = Math.max(size.x, size.y, size.z);
-        camera.position.set(0, largest * 0.35, largest * 2.25);
+        const sphere = new THREE.Box3().setFromObject(dragon).getBoundingSphere(new THREE.Sphere());
+        const verticalFov = THREE.MathUtils.degToRad(camera.fov);
+        const horizontalFov = 2 * Math.atan(Math.tan(verticalFov / 2) * camera.aspect);
+        const limitingFov = Math.min(verticalFov, horizontalFov);
+        const fittedDistance = (sphere.radius / Math.sin(limitingFov / 2)) * 1.16;
+        camera.near = fittedDistance / 100;
+        camera.far = fittedDistance * 100;
+        camera.position.set(0, sphere.radius * 0.12, fittedDistance);
+        camera.updateProjectionMatrix();
         controls.target.set(0, 0, 0);
         controls.update();
         stage.classList.add('is-loaded');
