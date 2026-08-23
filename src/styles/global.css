@@ -17,6 +17,7 @@
   --page-gutter-mobile: 16px;
   --grid-size: 40px;
   --grid-line: 1px;
+  --grid-color: color-mix(in srgb, var(--ink) 8%, transparent);
   --corner-size: 16px;
   --corner-offset: -7px;
   --corner-stroke: 2px;
@@ -30,12 +31,12 @@
   --technical-grid:
     linear-gradient(
       to right,
-      color-mix(in srgb, var(--ink) 8%, transparent) var(--grid-line),
+      var(--grid-color) var(--grid-line),
       transparent var(--grid-line)
     ),
     linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--ink) 8%, transparent) var(--grid-line),
+      var(--grid-color) var(--grid-line),
       transparent var(--grid-line)
     );
 
@@ -147,7 +148,7 @@ a:focus-visible {
   max-width: 720px;
 }
 .hero-grid {
-  border-bottom: 1px solid var(--rule);
+  border-bottom: var(--grid-line) solid var(--grid-color);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
@@ -402,7 +403,7 @@ h3 {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: var(--grid-line) solid var(--grid-color);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
@@ -504,7 +505,7 @@ h3 {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
-  border-bottom: 1px solid var(--rule);
+  border-bottom: var(--grid-line) solid var(--grid-color);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
