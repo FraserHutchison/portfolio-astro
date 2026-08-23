@@ -7,7 +7,9 @@
   --game-placeholder: #d8dde0;
   --dark-media: #111111;
   --on-dark: #ffffff;
-  --accent: var(--ink);
+  --link: #0057b8;
+  --link-hover: #003f86;
+  --accent: var(--link);
   --motif: var(--ink);
   --motif-soft: #929ca2;
 
@@ -68,12 +70,12 @@ iframe {
   max-width: 100%;
 }
 a {
-  color: inherit;
+  color: var(--link);
   text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
   text-underline-offset: 0.2em;
 }
 a:hover {
-  color: var(--accent);
+  color: var(--link-hover);
 }
 a:focus-visible {
   outline: 2px solid var(--accent);
