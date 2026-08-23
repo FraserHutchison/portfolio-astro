@@ -31,7 +31,7 @@ const pageTitle = title === SITE.title ? title : `${title} — ${SITE.name}`;
     <meta name="twitter:card" content={image ? 'summary_large_image' : 'summary'} />
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body id="top">
     <Header />
     <main><slot /></main>
     <Footer />

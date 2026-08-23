@@ -22,5 +22,8 @@ const { Content } = await render(post);
       {post.data.externalLink && <p><a href={post.data.externalLink}>View project on GitHub ↗</a></p>}
     </header>
     <div class="prose"><Content components={{ Video, YouTube }} /></div>
+    <nav class="article-end" aria-label="Article navigation">
+      <a href="#top">Jump to top ↑</a>
+    </nav>
   </article>
 </BaseLayout>

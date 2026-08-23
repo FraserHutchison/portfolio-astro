@@ -70,12 +70,12 @@ iframe {
   max-width: 100%;
 }
 a {
-  color: var(--link);
+  color: var(--ink);
   text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
   text-underline-offset: 0.2em;
 }
 a:hover {
-  color: var(--link-hover);
+  color: var(--muted);
 }
 a:focus-visible {
   outline: 2px solid var(--accent);
@@ -430,7 +430,33 @@ h3 {
 .prose {
   width: min(100%, var(--prose));
   margin-inline: auto;
-  padding-bottom: 96px;
+  padding-bottom: var(--section-divider-gap);
+}
+
+.prose a {
+  color: var(--link);
+}
+
+.prose a:hover {
+  color: var(--link-hover);
+}
+
+.article-end {
+  width: min(100%, var(--prose));
+  margin-inline: auto;
+  padding-bottom: var(--section-divider-gap);
+  text-align: right;
+}
+
+.article-end a {
+  display: inline-flex;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid currentColor;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 .prose h2 {
   margin: 2.5em 0 0.75em;
