@@ -1,7 +1,8 @@
 # fraserh.dev
 
-Fraser Hutchison’s technical-art portfolio, built with Astro and deployed to GitHub Pages.
+Technical-art portfolio, built with Astro and deployed to GitHub Pages.
 
+<summary>
 ## Add a post
 
 1. Duplicate a folder in `src/content/posts`.
@@ -12,12 +13,14 @@ Fraser Hutchison’s technical-art portfolio, built with Astro and deployed to G
 
 Normal images use Markdown: `![Description](./image.webp)`.
 
-Local video uses `<Video src="./clip.mp4" autoplay loop muted />` and YouTube uses `<YouTube url="https://www.youtube.com/watch?v=..." />`. Both components are automatically available in every post.
+- Local video uses `<Video src="./clip.mp4" autoplay loop muted />` and YouTube uses `<YouTube url="https://www.youtube.com/watch?v=..." />`.
 
-Pinned posts appear first without a label. Set `pinned: true` and `pinOrder: 1` in frontmatter. All other posts are newest-first.
+- Pinned posts appear first without a label. Set `pinned: true` and `pinOrder: 1` in frontmatter. All other posts are newest-first.
 
-Set `draft: true` to keep an unfinished post and its legacy redirect out of the generated site.
+- Set `draft: true` to keep an unfinished post and its legacy redirect out of the generated site.
+</summary>
 
+<summary>
 ## Asset guide
 
 Keep post-specific media beside that post's `index.mdx`. Export images at the sizes below before adding them to the repository; Astro will create smaller responsive versions where appropriate.
@@ -40,7 +43,6 @@ Keep post-specific media beside that post's `index.mdx`. Export images at the si
 - Use **SVG** for simple logos, icons, diagrams, and line artwork that can remain vector-based.
 - Use **PNG** when lossless detail or alpha transparency is important and WebP produces visible artefacts.
 - Avoid GIF for substantial animation. GIF files are usually much larger and lower quality than video.
-- WebP is an image format, not the preferred format for video. Animated WebP is suitable only for very short, silent image loops.
 
 ### Video
 
@@ -59,6 +61,7 @@ For longer or narrated videos, use controls:
 ```
 
 Use YouTube for long videos when repository size or streaming bandwidth would otherwise become significant.
+</summary>
 
 ## Local preview
 
