@@ -29,6 +29,8 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
 .intro h1 { margin: 0; font-size: clamp(3.1rem, 8vw, 7rem); font-weight: 700; letter-spacing: -.065em; }
 .intro-copy { max-width: 620px; margin: 28px 0 18px; font-size: clamp(1.08rem, 2vw, 1.35rem); line-height: 1.5; }
 .links { display: flex; flex-wrap: wrap; gap: 12px 24px; }
+.links a { display: inline-flex; align-items: center; gap: 8px; }
+.links img { width: 18px; height: 18px; object-fit: contain; }
 .post-list { border-top: 1px solid var(--rule); }
 .post-preview { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(260px, .75fr); gap: clamp(32px, 6vw, 88px); padding: clamp(48px, 7vw, 96px) 0; border-bottom: 1px solid var(--rule); align-items: center; }
 .post-preview:nth-child(even) { grid-template-columns: minmax(260px, .75fr) minmax(0, 1.55fr); }
