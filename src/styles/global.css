@@ -179,6 +179,19 @@ a:focus-visible {
   background: var(--motif);
   font-size: 1.1rem;
 }
+.intro > .eyebrow span {
+  color: transparent;
+  background-image: linear-gradient(
+    110deg,
+    var(--on-dark) 35%,
+    var(--muted) 50%,
+    var(--on-dark) 65%
+  );
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: eyebrow-shimmer 3.5s ease-in-out infinite;
+}
 h1,
 h2,
 h3 {
@@ -201,6 +214,15 @@ h3 {
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes eyebrow-shimmer {
+  0%,
+  55% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: -100% 50%;
   }
 }
 .intro > .intro-copy {
@@ -729,8 +751,12 @@ h3 {
     scroll-behavior: auto !important;
   }
   .intro > *,
-  .about-copy > * {
+  .about-copy > *,
+  .intro > .eyebrow span {
     animation: none;
+  }
+  .intro > .eyebrow span {
+    color: var(--on-dark);
   }
   .unity-strip-track {
     animation: none;
