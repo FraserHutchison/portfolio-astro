@@ -391,7 +391,7 @@ h3 {
   position: relative;
   isolation: isolate;
   width: min(100%, var(--prose));
-  margin: clamp(64px, 10vw, 128px) auto clamp(64px, 9vw, 112px);
+  margin: var(--section-divider-gap) auto clamp(64px, 9vw, 112px);
   padding-block: clamp(32px, 5vw, 64px);
 }
 .article-head::before {
@@ -402,6 +402,7 @@ h3 {
   left: 50%;
   width: 100vw;
   transform: translateX(-50%);
+  border-bottom: 1px solid var(--rule);
   background-image: var(--technical-grid);
   background-size: var(--grid-size) var(--grid-size);
 }
