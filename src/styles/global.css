@@ -148,12 +148,12 @@ h1, h2, h3 { line-height: 1.08; letter-spacing: -.035em; }
   .intro { padding-top: 64px; }
   .intro { min-height: 0; }
   .unity-strip { margin-top: -24px; }
-  .hero-artwork { position: relative; top: auto; right: auto; width: min(82vw, 340px); margin: 32px auto 0; transform: none; }
+  .hero-artwork { display: none; }
   .intro h1 { font-size: clamp(3rem, 17vw, 5rem); }
   .prose img, .prose video, .prose .embed { width: calc(100vw - 32px); }
   .site-footer { flex-direction: column; }
   .about-intro { grid-template-columns: 1fr; }
-  .profile-frame { width: min(72vw, 320px); }
+  .profile-frame { width: min(62vw, 260px); margin-inline: auto; }
   .experience { grid-template-columns: 1fr; gap: 32px; }
 }
 @media (max-width: 440px) {
