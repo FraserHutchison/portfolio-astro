@@ -15,6 +15,24 @@ https://fraserh.dev/
 
 Normal images use Markdown: `![Description](./image.webp)`.
 
+To control an image's rendered width, import it and use `SizedImage`. The width
+accepts percentages, pixels, or rem values and remains capped to the viewport:
+
+```mdx
+import shaderVariants from './shader-variants.webp';
+
+<SizedImage
+  src={shaderVariants}
+  alt="Shader variants window"
+  width="60%"
+  align="center"
+  caption="Optional caption"
+/>
+```
+
+`align` is optional and accepts `left`, `center` (the default), or `right`.
+Passing a number such as `width={520}` uses pixels.
+
 - Local video uses `<Video src="./clip.mp4" autoplay loop muted />` and YouTube uses `<YouTube url="https://www.youtube.com/watch?v=..." />`.
 
 - Pinned posts appear first without a label. Set `pinned: true` and `pinOrder: 1` in frontmatter. All other posts are newest-first.

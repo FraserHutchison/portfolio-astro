@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Video from '../../components/Video.astro';
 import YouTube from '../../components/YouTube.astro';
+import SizedImage from '../../components/SizedImage.astro';
 import { getPostSlug } from '../../utils/posts';
 
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ const { Content } = await render(post);
       {post.data.description && <p class="description">{post.data.description}</p>}
       {post.data.externalLink && <p><a href={post.data.externalLink}>View project on GitHub ↗</a></p>}
     </header>
-    <div class="prose"><Content components={{ Video, YouTube }} /></div>
+    <div class="prose"><Content components={{ Video, YouTube, SizedImage }} /></div>
     <nav class="article-end" aria-label="Article navigation">
       <a href="#top">Jump to top ↑</a>
     </nav>

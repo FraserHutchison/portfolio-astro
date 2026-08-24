@@ -574,6 +574,32 @@ h3 {
 .prose img {
   height: auto;
 }
+.prose .sized-image {
+  width: min(var(--media-width), calc(100vw - 2 * var(--page-gutter)));
+  margin-block: 2.5rem;
+}
+.prose .sized-image.align-left {
+  margin-right: auto;
+}
+.prose .sized-image.align-center {
+  margin-inline: auto;
+}
+.prose .sized-image.align-right {
+  margin-left: auto;
+}
+.prose .sized-image img {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  transform: none;
+}
+.prose .sized-image figcaption {
+  margin-top: var(--space-1);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
 .prose hr {
   border: 0;
   border-top: 1px solid var(--rule);
