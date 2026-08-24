@@ -22,6 +22,7 @@ const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(sor
     </section>
     <UnityIconStrip />
   </div>
+  <p class="project-count shell">PROJECTS / {posts.length.toString().padStart(2, '0')}</p>
   <section class="post-list shell" aria-label="Selected work and articles">
     {posts.map((post) => <PostPreview post={post} />)}
   </section>

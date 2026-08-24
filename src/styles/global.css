@@ -270,7 +270,10 @@ h3 {
 .post-list {
   position: relative;
   counter-reset: project;
+}
+.project-count {
   margin-top: var(--section-divider-gap);
+  margin-bottom: var(--space-2);
 }
 .post-preview {
   counter-increment: project;
@@ -347,14 +350,21 @@ h3 {
   height: 100%;
   object-fit: cover;
 }
+.project-count,
 .preview-content::before {
-  content: "PROJECT / " counter(project, decimal-leading-zero);
   display: block;
-  margin-bottom: var(--space-2);
   color: var(--motif);
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.13em;
+}
+.preview-content {
+  border: 1px solid var(--rule);
+  padding: clamp(16px, 2vw, 24px);
+}
+.preview-content::before {
+  content: "PROJECT / " counter(project, decimal-leading-zero);
+  margin-bottom: var(--space-2);
 }
 .preview-content h2 {
   margin: 0 0 var(--space-2);
