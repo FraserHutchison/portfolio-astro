@@ -8,13 +8,13 @@ pinOrder: 3
 legacyPath: /2025/02/26/post-thermal-vision-effect/
 ---
 
-I’ve been playing Metroid Prime Remaster recently and thought the thermal vision effect was a cool idea that I’d see about recreating something similar in Unity URP. 
+I’ve been playing Metroid Prime Remaster recently and thought the thermal vision effect was a cool idea that I’d see about recreating something similar in Unity URP.
 
 The main goal of this project wasn’t just to create the effect, but to see what sort of setup would work well if it was in actual production in triggering the effect.
 
 <YouTube url="https://www.youtube.com/watch?v=Vv-WuyIFiIg" />
 
----
+***
 
 ## Scriptable Renderers
 
@@ -32,7 +32,7 @@ The first is a Fullscreen render feature, mapping a purple gradient to the colou
 
 A simple depth buffer based fogging is also used to make the scene less noisy.
 
-_See the next step as to why some objects aren't visible here._
+*See the next step as to why some objects aren't visible here.*
 
 ![post thermal vision effect gradienteditor](./post-thermal-vision-effect-gradienteditor.jpg)
 
@@ -40,7 +40,7 @@ _See the next step as to why some objects aren't visible here._
 
 <YouTube url="https://www.youtube.com/watch?v=lglEWsNcfi8" />
 
----
+***
 
 ### Render Objects Render Feature
 
@@ -52,7 +52,7 @@ The next is a Render Objects render feature that renders objects withing the “
 
 ![post thermal vision effect matcap](./post-thermal-vision-effect-matcap.jpg)
 
----
+***
 
 ### Fullscreen Render Feature 2
 
@@ -70,16 +70,16 @@ There's nothing complex going on here,  just several effects stacked on top of e
 
 ![post thermal vision effect fullscreen2 C](./post-thermal-vision-effect-fullscreen2-C.png)
 
----
- 
+***
+
 ## C# Scripts
 
 The next step was figuring out a way to trigger the effect. I went about creating a couple scripts for this so the approach would be modular and component based, so any effect could be hooked up without any hardcoding of “thermal vision” variables.
 
-- SequencedEvents.cs
-- MaterialAnimator.cs
-- SwitchScriptableRendererData.cs
-- InputToggleEvent.cs
+* SequencedEvents.cs
+* MaterialAnimator.cs
+* SwitchScriptableRendererData.cs
+* InputToggleEvent.cs
 
 ![post thermal vision effect scripts](./post-thermal-vision-effect-scripts.png)
 
@@ -103,7 +103,7 @@ InputToggleEvent.cs takes two Unity Events as inputs, one for true and one false
 
 Using these scripts, I’m able to set up the feature in a very modular and accessible way, allowing for additional things to be triggered or changed easily by artists or designers without the need for an engineer or technical artist. It can also be used to trigger any type or number of events so it isn't limited to just “thermal vision”.
 
-**[Check the git repo for the source code!](https://github.com/FraserHutchison/unity-urp-thermal-vision/tree/master)**
+[Check the git repo for the source code!](https://github.com/FraserHutchison/unity-urp-thermal-vision/tree/master)
 
 SciFi Environment Asset Pack by [Sickhead Games](https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-construction-kit-modular-159280#publisher) on the Unity Asset Store
 
