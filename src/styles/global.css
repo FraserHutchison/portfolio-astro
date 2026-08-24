@@ -12,6 +12,7 @@
   --accent: var(--link);
   --motif: var(--ink);
   --motif-soft: #929ca2;
+  --hero-glow: color-mix(in srgb, var(--ink) 18%, transparent);
 
   --page: 1160px;
   --prose: 760px;
@@ -69,6 +70,7 @@
   --link: #72b7ff;
   --link-hover: #a7d2ff;
   --motif-soft: #7f898f;
+  --hero-glow: color-mix(in srgb, var(--ink) 22%, transparent);
   --grid-color: color-mix(in srgb, var(--ink) 9%, transparent);
   color-scheme: dark;
 }
@@ -280,8 +282,11 @@ h3 {
   width: min(45vw, 520px);
   aspect-ratio: 1;
   transform: translateY(-50%);
+  filter: drop-shadow(0 0 12px var(--hero-glow))
+    drop-shadow(0 0 28px color-mix(in srgb, var(--hero-glow) 55%, transparent));
   object-fit: contain;
   pointer-events: none;
+  transition: filter 180ms ease;
 }
 .links {
   display: flex;
