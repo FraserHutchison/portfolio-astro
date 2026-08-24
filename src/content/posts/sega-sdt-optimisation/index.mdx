@@ -8,27 +8,25 @@ pinOrder: 1
 legacyPath: /2024/02/14/sega-sdt-optimisation/
 ---
 
-import shaderControlUnityAssetStore from './shader_control_unity_asset_store.jpg';
-
 <YouTube url="https://www.youtube.com/watch?v=H0jKqUIhpik" />
 
 ## Optimisation
 
-- Shaders Variants and Memory
-- Shader Pre-Warming
-- Island Culling
-- Particle Culling
-- Asset compression
+* Shaders Variants and Memory
+* Shader Pre-Warming
+* Island Culling
+* Particle Culling
+* Asset compression
 
 This post covers optimisations that we used in making [Sonic Dream Team](https://apps.apple.com/us/app/sonic-dream-team/id1609094795). It's not an exhaustive list, but some of the things that spring to mind when looking back at its development.
 
 It was a big team effort to get the game running on all devices, so thank you to everyone for making it possible!
 
-[Sonic Dream Team](https://apps.apple.com/us/app/sonic-dream-team/id1609094795) was made specifically for [Apple Arcade](https://www.apple.com/uk/apple-arcade/), which means for all iOS devices, ranging from iPhone, iPad, Apple TV, Mac and the Vision Pro. With such a broad range of devices, performance was important, with the main emphasis having to be put on low-end devices. The target was to average 30fps on low-end and 60fps on mid to high end. 
+[Sonic Dream Team](https://apps.apple.com/us/app/sonic-dream-team/id1609094795) was made specifically for [Apple Arcade](https://www.apple.com/uk/apple-arcade/), which means for all iOS devices, ranging from iPhone, iPad, Apple TV, Mac and the Vision Pro. With such a broad range of devices, performance was important, with the main emphasis having to be put on low-end devices. The target was to average 30fps on low-end and 60fps on mid to high end.
 
 The three key low-end devices were the [iPhone 6 (2014)](https://www.gsmarena.com/apple_iphone_6-6378.php), [iPad Air 2 (2014)](https://www.gsmarena.com/apple_ipad_air_2-6742.php) and the [Apple TV HD (2015)](https://www.apple.com/by/apple-tv-hd/specs/). These all used some variation of the A8 chip and were the least powerful of all the devices we covered. Because of that, I spent a lot of time with all three, playing the game at the absolute lowest possible settings, meaning that when I got to play the game on my [iPad Air 5th gen (2022)](https://www.apple.com/uk/shop/buy-ipad/ipad-air), I could play it on maxed out settings, making it an absolute treat!
 
-I was the only technical artist on the project so one of my main responsibilities was profiling. This meant scheduling tasks for different teams to optimise their work, alongside implementing many optimisations myself. I did this by setting aside specific dates to review the current state of the game and profile several devices at once using [Unity's](https://docs.unity3d.com/Manual/performance-profiling-tools.html) and [XCode's profiling tools](https://developer.apple.com/documentation/xcode/performance-and-metrics). Later on in the project's development, an automated testing setup was created by the engineering team so we could get more averaged performance data and track whether different branches had big performance impacts or not. This data wasn't super detailed but gave stats like CPU and GPU time, along with device memory and what level the data was coming from. This didn't replace manual profiling but was a great way to get a more bird's-eye view. 
+I was the only technical artist on the project so one of my main responsibilities was profiling. This meant scheduling tasks for different teams to optimise their work, alongside implementing many optimisations myself. I did this by setting aside specific dates to review the current state of the game and profile several devices at once using [Unity's](https://docs.unity3d.com/Manual/performance-profiling-tools.html) and [XCode's profiling tools](https://developer.apple.com/documentation/xcode/performance-and-metrics). Later on in the project's development, an automated testing setup was created by the engineering team so we could get more averaged performance data and track whether different branches had big performance impacts or not. This data wasn't super detailed but gave stats like CPU and GPU time, along with device memory and what level the data was coming from. This didn't replace manual profiling but was a great way to get a more bird's-eye view.
 
 Something great we had access to was [Unity project reviews](https://unity.com/legal/terms-of-service/success-plans/project-review). This comes as part of the Unity Pro licence, where Unity will organise a couple of developers to review your project with you and help improve or provide knowledge into specific areas you want to know about. This was held twice throughout the project, the first being in person, running for two days in the office, and the second over a week on Zoom. It was great to have this insider knowledge as it confirmed some of our findings and helped to find things we might have missed.
 
@@ -38,21 +36,17 @@ Below, I've listed different areas that were the main problems and explained wha
 
 ### Variants
 
-Something I think most tech and rendering teams are familiar with is shader variants, [they have become a real problem in modern game development](https://therealmjp.github.io/posts/shader-permutations-part1/). In a world where games can run on so many devices and platforms, shaders have to be adapted to work with all of them to handle the different hardware and graphics API. Unity's scriptable rendering pipelines are no exception, they provide a fantastic way to deploy to so many different devices but with the cost of high shader memory, which on Mobile doesn't fly. Most of the low-end devices only had 1-2GB of RAM, so keeping the game running on as little as possible was crucial, otherwise, it incurs crashes and device slow down. Handling memory for textures, audio and meshes was for the most part simple. Making sure to have your compression settings set, sizes of textures clamped to the lowest they can be and setting audio compression methods to what made sense per clip was easy, but for shaders, it was a different beast. 
+Something I think most tech and rendering teams are familiar with is shader variants, [they have become a real problem in modern game development](https://therealmjp.github.io/posts/shader-permutations-part1/). In a world where games can run on so many devices and platforms, shaders have to be adapted to work with all of them to handle the different hardware and graphics API. Unity's scriptable rendering pipelines are no exception, they provide a fantastic way to deploy to so many different devices but with the cost of high shader memory, which on Mobile doesn't fly. Most of the low-end devices only had 1-2GB of RAM, so keeping the game running on as little as possible was crucial, otherwise, it incurs crashes and device slow down. Handling memory for textures, audio and meshes was for the most part simple. Making sure to have your compression settings set, sizes of textures clamped to the lowest they can be and setting audio compression methods to what made sense per clip was easy, but for shaders, it was a different beast.
 
 Shader memory could easily become 4–5 times the size of the entire art memory combined, which in the beginning always caused out-of-memory crashes. Unity already has some built-in shader stripping to reduce the number of variants it generates, but not enough to decrease it to an acceptable standard. For console and PC games, this would be fine as the RAM amounts are much higher, but for low-spec mobile, it becomes a problem. During development, [Unity implemented Pre-Filtering](https://discussions.unity.com/t/improvements-to-shader-build-time-and-runtime-memory-usage/887170) and [Dynamic Shader Variant Loading](https://discussions.unity.com/t/dynamic-shader-variant-loading/894939), which helped a lot with not compiling unneeded variants meaning fewer shaders in runtime memory, but again more had to be done.
 
-I found that certain passes like [DepthNormals](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@15.0/api/UnityEngine.Rendering.Universal.Internal.DepthNormalOnlyPass.html) were still being compiled even though we were not using them, and various shader feature keywords were not needed. I opted to use [Shader Control on the Unity Asset Store](https://assetstore.unity.com/packages/vfx/shaders/shader-control-74817), it was a great help in understanding the keyword combinations we were using, which meant I could more easily toggle certain keywords to be stripped. However, I did find it somewhat limiting in certain areas, like the ability to globally strip keywords and passes, which I ended up creating a custom script for. 
+I found that certain passes like [DepthNormals](https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@15.0/api/UnityEngine.Rendering.Universal.Internal.DepthNormalOnlyPass.html) were still being compiled even though we were not using them, and various shader feature keywords were not needed. I opted to use [Shader Control on the Unity Asset Store](https://assetstore.unity.com/packages/vfx/shaders/shader-control-74817), it was a great help in understanding the keyword combinations we were using, which meant I could more easily toggle certain keywords to be stripped. However, I did find it somewhat limiting in certain areas, like the ability to globally strip keywords and passes, which I ended up creating a custom script for.
 
-I have since been working on a stripping system in my own time, which I hope to be able to use in the future to better control variants. But, if anyone is looking for a way to handle shader stripping without scripting it yourself, then definitely check out [Shader Control](https://assetstore.unity.com/packages/vfx/shaders/shader-control-74817). 
+I have since been working on a stripping system in my own time, which I hope to be able to use in the future to better control variants. But, if anyone is looking for a way to handle shader stripping without scripting it yourself, then definitely check out [Shader Control](https://assetstore.unity.com/packages/vfx/shaders/shader-control-74817).
 
 [Unity does have it "In-Progress" on its roadmap to improve shader stripping, so I'll eagerly wait to see what they come up with.](https://portal.productboard.com/8ufdwj59ehtmsvxenjumxo82/c/1389-improved-shader-variants-management)
 
-<SizedImage
-  src={shaderControlUnityAssetStore}
-  alt="Shader Control on the Unity Asset Store"
-  width="60%"
-/>
+<SizedImage src={shaderControlUnityAssetStore} alt="Shader Control on the Unity Asset Store" width="60%" />
 
 ![unity shader pre filtering](./unity_shader_pre_filtering.jpg)
 
@@ -62,13 +56,13 @@ Another annoying shader-related thing is pre-warming. It is the act of preloadin
 
 You could ask, why didn't we just collect the variants we needed in editor and strip/load them based on that data?
 
-Well, if you are using DirectX11 or OpenGL you are in luck, but anything else like Metal, DirectX12 or Vulkan it gets complicated. U[nity provides a shader collection/pre-warming API](https://docs.unity3d.com/ScriptReference/Shader.WarmupAllShaders.html), but if you are using something like Metal (which we are) then the shader must also have the specific vertex layout group of each mesh to correctly pre-warm (load) the shader. This means you can't simply do this in the editor and instead needs to be done on the device, but we are targeting lots of devices... 
+Well, if you are using DirectX11 or OpenGL you are in luck, but anything else like Metal, DirectX12 or Vulkan it gets complicated. U[nity provides a shader collection/pre-warming API](https://docs.unity3d.com/ScriptReference/Shader.WarmupAllShaders.html), but if you are using something like Metal (which we are) then the shader must also have the specific vertex layout group of each mesh to correctly pre-warm (load) the shader. This means you can't simply do this in the editor and instead needs to be done on the device, but we are targeting lots of devices...
 
 ![unity prewarming](./unity_prewarming.jpg)
 
 This meant, although I'm sure it is possible, we couldn't do this in the time frame we had, so instead we needed a different approach. One of the engineers was designated to create a system of "flashing" the entire level in front of the camera during the loading screen. As naive of an approach as it sounds, speaking to other developers at other studios, this seemed to be the most common approach. This meant we could pre-warm each shader in the level with the correct vertex layout group and reduce any GPU stuttering to near zero. This also meant we could pre-warm particle shaders, which was one of the main areas where we found GPU stuttering. There are still some stutters now and then, more so again on the low-end devices, but this is much more acceptable than what we had before, where it would stutter constantly when entering a level.
 
-Another question you might have is why not do this compilation in the menu like so many games do now (I'm looking at you, The Last Of Us PC edition). Because this is a mobile game, players are much less likely to sit about and wait for a load of shaders to compile before even getting to play the game. Instead, I think waiting an extra couple of seconds per load screen is better suited to the way mobile games are played. 
+Another question you might have is why not do this compilation in the menu like so many games do now (I'm looking at you, The Last Of Us PC edition). Because this is a mobile game, players are much less likely to sit about and wait for a load of shaders to compile before even getting to play the game. Instead, I think waiting an extra couple of seconds per load screen is better suited to the way mobile games are played.
 
 ## Level Optimisation
 
