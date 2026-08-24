@@ -9,8 +9,38 @@ const path = Astro.url.pathname;
     <a class="home-link" href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
     <a class="about-link" href="/about/" aria-current={path === '/about/' ? 'page' : undefined}>About</a>
   </nav>
-  <a class="header-social" href={SITE.social.linkedin} rel="me noreferrer">
-    <img src="/icons/linkedin.svg" alt="" />
-    <span>LinkedIn</span>
-  </a>
+  <div class="header-actions">
+    <button class="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">
+      <span class="theme-icon theme-icon-light" aria-hidden="true">☼</span>
+      <span class="theme-icon theme-icon-dark" aria-hidden="true">☾</span>
+      <span class="theme-label">Dark</span>
+    </button>
+    <a class="header-social" href={SITE.social.linkedin} rel="me noreferrer">
+      <img src="/icons/linkedin.svg" alt="" />
+      <span>LinkedIn</span>
+    </a>
+  </div>
 </header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.theme-toggle');
+
+  const updateToggle = (theme: 'light' | 'dark') => {
+    if (!toggle) return;
+    const isDark = theme === 'dark';
+    toggle.ariaPressed = String(isDark);
+    toggle.ariaLabel = `Switch to ${isDark ? 'light' : 'dark'} mode`;
+    const label = toggle.querySelector<HTMLElement>('.theme-label');
+    if (label) label.textContent = isDark ? 'Light' : 'Dark';
+  };
+
+  if (toggle) {
+    updateToggle(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+    toggle.addEventListener('click', () => {
+      const theme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      document.documentElement.dataset.theme = theme;
+      localStorage.setItem('theme', theme);
+      updateToggle(theme);
+    });
+  }
+</script>
