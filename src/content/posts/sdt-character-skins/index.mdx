@@ -1,10 +1,131 @@
 ---
-title: 'Sonic Dream Team | "Character Skins"'
+title: 'Bringing Sonic Forces & Dash Skins to Sonic Dream Team"'
 date: 2025-06-22
-description: "The pipeline for creating character skins in Sonic Dream Team."
+description: "The porting pipeline for bringing character skins from Sonic Forces and Sonic Dash to Sonic Dream Team."
 cover: ./sega-sdt-character-skins-icon.jpg
 legacyPath: /2025/06/22/sdt-character-skins/
-draft: true
 ---
+<YouTube url="https://www.youtube.com/watch?v=ALZwClc_no0" />
+  
+At HARDlight, our art team constantly produces new character skins for *Sonic Forces* and *Sonic Dash*, handling everything from initial concepts to creation and implementation. With so many great-looking designs, a question naturally arose: could we bring these skins to *Sonic Dream Team*?
 
-WIP
+## The Challenge
+
+There were three key constraints to consider:
+
+* **Animation compatibility:** Each character needed to use its existing animation set. We couldn't tweak or create animations, so the skinning had to match perfectly and the underlying skeleton had to remain unchanged.
+* **Model quality:** The *Sonic Forces* and *Sonic Dash* characters each had two model variants: a high-poly promotional render and a low-poly in-game model. The promotional model was far too detailed to use in-game as-is, while the game model was too low-poly and low-resolution for *Sonic Dream Team*. The assets for *Sonic Forces* and *Sonic Dash* are heavily optimised to support an extremely broad range of devices. *Sonic Dream Team*, however, is an Apple Arcade exclusive, and even its lower-end target hardware is often more powerful than devices running those games.
+* **Production time:** Each skin needed to be quick to create and port.
+
+After some investigation, I confirmed that it was possible. I defined the full pipeline and handled the initial porting work before handing off some of the model preparation to another artist.
+
+It was a significant task. I hadn't been involved in the animation pipeline during the game's original development, so there was a lot to unpack and understand.
+
+Thankfully, [Superspline](https://supersplinestudios.com/), the studio contracted for animation and rigging, had created detailed videos explaining its setup. After working through the documentation, I refreshed my Maya skills, learned more about rigging, and created a test character to validate the workflow.
+
+INSERT IMAGE
+
+## The Porting Pipeline
+
+The final pipeline worked as follows:
+
+### 1. Mesh Optimisation
+
+Reduce the high-resolution promotional model to a triangle count suitable for use in-game.
+
+INSERT COMPARISON IMAGE
+
+### 2. Material Consolidation
+
+The original models often used multiple materials to achieve the best possible visuals. For the game-ready versions, these needed to be consolidated into just one or two materials.
+
+This meant recreating the textures in Substance Painter, using the original source files as references. The simplest approach was to open two instances of Substance Painter, create Smart Materials from the source asset to reproduce its surface finishes one-to-one, and then bring those materials into the new file.
+
+Why not duplicate and edit the original source file? I wondered the same thing. After testing both approaches, however, I found that recreating the file was quicker and easier than untangling an older project.
+
+INSERT COMPARISON IMAGE
+
+### 3. Rig Integration
+
+Duplicate the corresponding *Sonic Dream Team* character rig in Maya, then import the new mesh.
+
+### 4. Rig Preparation
+
+Close the character's eyes and reveal the eyelashes using driven keys. This was crucial for an accurate skin-weight transfer; without it, the transferred weights were incorrect.
+
+INSERT EYE COMPARISON IMAGE
+
+### 5. Rig Transfer
+
+Transfer the rig and skin weights to the new model. I partially automated this with a script based primarily on Maya's existing skin-weight transfer tools, with a few modifications.
+
+### 6. Weight Cleanup
+
+Manually correct any problematic deformation using skin-weight painting. Because the source and target meshes weren't perfect one-to-one matches, several areas required cleanup. There was nothing fancy involved here—just good old-fashioned skinning.
+
+### 7. Unity Setup
+
+Export the character from Maya using Game Exporter, import it into Unity, and configure the prefabs and gameplay components to match the existing characters.
+
+### 8. Animation Testing
+
+Test the animations in-game, checking for mesh clipping and deformation issues.
+
+INSERT ANIMATION GIFS
+
+### 9. UI Asset Creation
+
+Pose the rigged model and create all required UI assets. Our artists completed this step using the original source files in 3ds Max or Blender, depending on which digital content creation tool the character had originally been built in.
+
+INSERT UI RENDER IMAGES
+
+### 10. Approval
+
+Create turnaround sheets and submit them to SEGA Japan for approval. Because these character designs had already been approved, the turnaround was quick and required only minor visual tweaks.
+
+<YouTube url="https://www.youtube.com/watch?v=2Ix6qV4VrN0" />
+
+## Results
+
+Although the process may sound lengthy, I could complete a skin in around **four days**—far quicker than our initial estimate of two to three weeks. **Some characters took only two days** because they had simpler meshes and textures, or aligned more closely with the existing *Sonic Dream Team* character silhouette.
+
+The workload was shared between me and another artist. They focused on posed renders and assisted with modelling and texturing, while I handled the rigging, Unity integration, and additional model and texture work.
+
+In total, we ported 11 skins. It was rewarding to see the characters looking nearly identical to their high-resolution renders while being fully playable in-game.
+
+More of the process could undoubtedly be automated—especially if additional skins were planned from the beginning of production. Given the relatively straightforward and fast turnaround, however, a mostly manual workflow with targeted automation got the job done.
+
+INSERT GIF OF ALL SKINS SIDE BY SIDE
+
+## Solving Character-Specific Rigging Challenges
+
+Skinning was the most complex part of the process, particularly because every rig needed to function identically to the original. Some characters also had unique quirks. For example, the female characters had hidden eyelashes controlled by driven keys, while Cheese the Chao used custom meshes for emotes and multiple facial expressions.
+
+To streamline the workflow, I created several Maya Python tools using PyMel. These automated tasks such as transferring rigs, toggling eye states, and selecting driver bones.
+
+INSERT MAYA SHELF IMAGE WITH NOTATION
+
+## What I Learned
+
+This project was a fantastic deep dive into the animation pipeline. I learned a great deal—not only about rigging in Maya, but also about how we could improve the process next time. It even inspired me to start learning rigging in Blender at home, an area I hadn't previously explored in much depth.
+
+## The Skins
+
+INSERT IMAGES/GIFS
+
+* Drummer Cream
+* Unicorn Cream
+* Amy Popstar
+* Rockstar Rouge
+* Pirate Sonic
+* Treasure Hunter Knuckles
+* Tails Valiant
+* Idol Shadow
+* Warrior Shadow
+* Valentines Rouge
+* Dulce Amy
+* Sonic Lunar?
+
+<YouTube url="https://www.youtube.com/watch?v=hX9daejGFXA" />
+
+#
