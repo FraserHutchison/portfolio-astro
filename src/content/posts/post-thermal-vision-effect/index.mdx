@@ -8,6 +8,19 @@ pinOrder: 3
 legacyPath: /2025/02/26/post-thermal-vision-effect/
 ---
 
+
+import imagePostThermalVisionEffectRenderfeatures from './post-thermal-vision-effect-renderfeatures.png';
+import imagePostThermalVisionEffectGradienteditor from './post-thermal-vision-effect-gradienteditor.jpg';
+import imagePostThermalVisionEffectFullscreen1 from './post-thermal-vision-effect-fullscreen1.jpg';
+import imagePostThermalVisionEffectLayermask from './post-thermal-vision-effect-layermask.jpg';
+import imagePostThermalVisionEffectMatcap from './post-thermal-vision-effect-matcap.jpg';
+import imagePostThermalVisionEffectFullscreen2Full from './post-thermal-vision-effect-fullscreen2-full.png';
+import imagePostThermalVisionEffectFullscreen2A from './post-thermal-vision-effect-fullscreen2-A.png';
+import imagePostThermalVisionEffectFullscreen2B from './post-thermal-vision-effect-fullscreen2-B.png';
+import imagePostThermalVisionEffectFullscreen2C from './post-thermal-vision-effect-fullscreen2-C.png';
+import imagePostThermalVisionEffectScripts from './post-thermal-vision-effect-scripts.png';
+import imagePostThermalVisionEffectRenderpipeline from './post-thermal-vision-effect-renderpipeline.png';
+
 I’ve been playing Metroid Prime Remaster recently and thought the thermal vision effect was a cool idea that I’d see about recreating something similar in Unity URP.
 
 The main goal of this project wasn’t just to create the effect, but to see what sort of setup would work well if it was in actual production in triggering the effect.
@@ -20,12 +33,11 @@ The main goal of this project wasn’t just to create the effect, but to see wha
 
 I went about using two Universal Renderer Data assets loaded into the Pipeline Asset and switching them at runtime on a button press. The default asset is what would be used in normal gameplay and thermal vision making use of three render features.
 
-![post thermal vision effect renderpipeline](./post-thermal-vision-effect-renderpipeline.png)
+<SizedImage src={imagePostThermalVisionEffectRenderpipeline} alt="post thermal vision effect renderpipeline" width="88%" />
 
 ## Thermal Vision Effect
 
-![post thermal vision effect renderfeatures](./post-thermal-vision-effect-renderfeatures.png)
-
+<SizedImage src={imagePostThermalVisionEffectRenderfeatures} alt="post thermal vision effect renderfeatures" width="100%" />
 ### Fullscreen Render Feature 1
 
 The first is a Fullscreen render feature, mapping a purple gradient to the colour buffer. This gradient was made using a custom script to generate a gradient texture from a scriptable object as HLSL/Unity doesn't have a gradient input field.
@@ -34,10 +46,8 @@ A simple depth buffer based fogging is also used to make the scene less noisy.
 
 *See the next step as to why some objects aren't visible here.*
 
-![post thermal vision effect gradienteditor](./post-thermal-vision-effect-gradienteditor.jpg)
-
-![post thermal vision effect fullscreen1](./post-thermal-vision-effect-fullscreen1.jpg)
-
+<SizedImage src={imagePostThermalVisionEffectGradienteditor} alt="post thermal vision effect gradienteditor" width="100%" />
+<SizedImage src={imagePostThermalVisionEffectFullscreen1} alt="post thermal vision effect fullscreen1" width="100%" />
 <YouTube url="https://www.youtube.com/watch?v=lglEWsNcfi8" />
 
 ***
@@ -46,12 +56,10 @@ A simple depth buffer based fogging is also used to make the scene less noisy.
 
 The next is a Render Objects render feature that renders objects withing the “ThermalVision” layer with a [matcap shader](https://learn.foundry.com/modo/content/help/pages/shading_lighting/shader_items/matcap.html) to give the highlighted look. This shader also adds a small amount of vertex displacement for some extra movement.
 
-![post thermal vision effect layermask](./post-thermal-vision-effect-layermask.jpg)
-
+<SizedImage src={imagePostThermalVisionEffectLayermask} alt="post thermal vision effect layermask" width="100%" />
 <YouTube url="https://www.youtube.com/watch?v=xPozwCLof_E" />
 
-![post thermal vision effect matcap](./post-thermal-vision-effect-matcap.jpg)
-
+<SizedImage src={imagePostThermalVisionEffectMatcap} alt="post thermal vision effect matcap" width="100%" />
 ***
 
 ### Fullscreen Render Feature 2
@@ -62,14 +70,10 @@ There's nothing complex going on here,  just several effects stacked on top of e
 
 <YouTube url="https://www.youtube.com/watch?v=LPYIFpIlk7Y" />
 
-![post thermal vision effect fullscreen2 full](./post-thermal-vision-effect-fullscreen2-full.png)
-
-![post thermal vision effect fullscreen2 A](./post-thermal-vision-effect-fullscreen2-A.png)
-
-![post thermal vision effect fullscreen2 B](./post-thermal-vision-effect-fullscreen2-B.png)
-
-![post thermal vision effect fullscreen2 C](./post-thermal-vision-effect-fullscreen2-C.png)
-
+<SizedImage src={imagePostThermalVisionEffectFullscreen2Full} alt="post thermal vision effect fullscreen2 full" width="100%" />
+<SizedImage src={imagePostThermalVisionEffectFullscreen2A} alt="post thermal vision effect fullscreen2 A" width="100%" />
+<SizedImage src={imagePostThermalVisionEffectFullscreen2B} alt="post thermal vision effect fullscreen2 B" width="100%" />
+<SizedImage src={imagePostThermalVisionEffectFullscreen2C} alt="post thermal vision effect fullscreen2 C" width="100%" />
 ***
 
 ## C# Scripts
@@ -81,8 +85,7 @@ The next step was figuring out a way to trigger the effect. I went about creatin
 * SwitchScriptableRendererData.cs
 * InputToggleEvent.cs
 
-![post thermal vision effect scripts](./post-thermal-vision-effect-scripts.png)
-
+<SizedImage src={imagePostThermalVisionEffectScripts} alt="post thermal vision effect scripts" width="100%" />
 ### SequencedEvents.cs
 
 SequencedEvents.cs allows any number of Unity events on any object to fire in sequence, with optional delay between each event. This is done using a coroutine. Start the sequence by calling StartSequence().

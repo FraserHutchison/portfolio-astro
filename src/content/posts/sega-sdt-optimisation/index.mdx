@@ -9,6 +9,14 @@ legacyPath: /2024/02/14/sega-sdt-optimisation/
 ---
 
 
+
+import imageUnityShaderPreFiltering from './unity_shader_pre_filtering.jpg';
+import imageUnityPrewarming from './unity_prewarming.jpg';
+import imageIslandCullingOverview from './island_culling_overview.jpg';
+import imageProcExample from './proc-example.gif';
+import imageNonDeterministicParticles from './non_deterministic_particles.jpg';
+import imageUnityProjectAuditor from './unity_project_auditor.jpg';
+
 import shaderControlUnityAssetStore from './shader_control_unity_asset_store.jpg';
 
 <YouTube url="https://www.youtube.com/watch?v=H0jKqUIhpik" />
@@ -51,8 +59,7 @@ I have since been working on a stripping system in my own time, which I hope to 
 
 <SizedImage src={shaderControlUnityAssetStore} alt="Shader Control on the Unity Asset Store" width="60%" />
 
-![unity shader pre filtering](./unity_shader_pre_filtering.jpg)
-
+<SizedImage src={imageUnityShaderPreFiltering} alt="unity shader pre filtering" width="100%" />
 ## Pre-Warming
 
 Another annoying shader-related thing is pre-warming. It is the act of preloading the shader into runtime memory so it doesn't cause GPU stuttering when playing the game. This is because the shader variant can be pre-compiled instead of compiling there and then, causing micro stutters. On high-end devices, this isn't really an issue as the compilation happens so quickly due to the power of the hardware, but once again, on low-end this can cause the "micro" stutters to become huge.
@@ -61,8 +68,7 @@ You could ask, why didn't we just collect the variants we needed in editor and s
 
 Well, if you are using DirectX11 or OpenGL you are in luck, but anything else like Metal, DirectX12 or Vulkan it gets complicated. U[nity provides a shader collection/pre-warming API](https://docs.unity3d.com/ScriptReference/Shader.WarmupAllShaders.html), but if you are using something like Metal (which we are) then the shader must also have the specific vertex layout group of each mesh to correctly pre-warm (load) the shader. This means you can't simply do this in the editor and instead needs to be done on the device, but we are targeting lots of devices...
 
-![unity prewarming](./unity_prewarming.jpg)
-
+<SizedImage src={imageUnityPrewarming} alt="unity prewarming" width="100%" />
 This meant, although I'm sure it is possible, we couldn't do this in the time frame we had, so instead we needed a different approach. One of the engineers was designated to create a system of "flashing" the entire level in front of the camera during the loading screen. As naive of an approach as it sounds, speaking to other developers at other studios, this seemed to be the most common approach. This meant we could pre-warm each shader in the level with the correct vertex layout group and reduce any GPU stuttering to near zero. This also meant we could pre-warm particle shaders, which was one of the main areas where we found GPU stuttering. There are still some stutters now and then, more so again on the low-end devices, but this is much more acceptable than what we had before, where it would stutter constantly when entering a level.
 
 Another question you might have is why not do this compilation in the menu like so many games do now (I'm looking at you, The Last Of Us PC edition). Because this is a mobile game, players are much less likely to sit about and wait for a load of shaders to compile before even getting to play the game. Instead, I think waiting an extra couple of seconds per load screen is better suited to the way mobile games are played.
@@ -73,8 +79,7 @@ Another question you might have is why not do this compilation in the menu like 
 
 One thing that didn't occur as a problem until later on in development was how islands in each zone were rendered. In the beginning, all islands in a level were rendered the entire time you were playing a mission, but when the levels became fully fleshed out with props, enemies, particles etc it became too much of a stress for the low-end devices. We weren't using the [Occlusion Culling](https://docs.unity3d.com/Manual/OcclusionCulling.html) in Unity due to poor performance results on low-end hardware, so instead the chief engineer put together a system that could toggle groups of meshes based on their parent depending on which trigger the player was in. Below is a general map of how the system works.
 
-![island culling overview](./island_culling_overview.jpg)
-
+<SizedImage src={imageIslandCullingOverview} alt="island culling overview" width="100%" />
 Because the levels were not initially designed to have culling in mind, "dog legs" and doorways had to be added as a makeshift solution to allow areas to be culled seamlessly without serious pop-in. I added various subgroups so that when a transition would happen, different parts of both islands could be temporarily rendered, meaning no weird sections where parts were not loaded. There are ways to break this I'm sure, but the majority of cases should have been covered. This was a big effort by myself, game design and the art team to implement, but the results were great. Instead of being over 16.6ms or 33.3ms, we were always under, which meant levels played much smoother.
 
 ### Particle Culling
@@ -85,20 +90,17 @@ The main reason for this was having near enough all particles being rendered all
 
 Alongside this, we also experienced particles not culling due to certain parameters being enabled that made the particles non-deterministic which means Unity could not specify how large the bounding box volumes should be, thus having them not be culled. [After finding a Unity blog post talking about this exact issue](https://unity.com/blog/engine-platform/particlesystem-performance-culling-tips), we added our own custom particle bounds script that meant non-deterministic particles could still be culled based on the camera frustum through a pre-defined volume size.
 
-![proc example](./proc-example.gif)
-
+<SizedImage src={imageProcExample} alt="proc example" width="100%" />
 To tell if a particle is deterministic or not, look for the little exclamation mark at the top of a particle system. I don't think this is very clear on Unity's part, but I suppose with the VFX graph being the new particle system, I doubt this will be updated any time soon.
 
-![non deterministic particles](./non_deterministic_particles.jpg)
-
+<SizedImage src={imageNonDeterministicParticles} alt="non deterministic particles" width="100%" />
 ### Asset Compression
 
 Compression settings are one of those things that if not checked regularly, can lead to some nasty surprises. What I wish I could say is Unity's asset import pipeline is fantastic! But sadly, we had some bugs with it. [Unity does allow for auto setting of import presets based on name, asset type and folder location](https://docs.unity3d.com/Manual/class-PresetManager.html), but we found that these worked sometimes but not all the time, and would vary depending on what platforms the user had installed on their PC. HARDlight does have its own system for forcing compression settings but being a new project, we thought we would try out Unity's system. Instead, we ended up with the more manual approach of asking artists to set the presets based on [some premade settings](https://docs.unity3d.com/Manual/Presets.html), all the artists would have to do was pick one. This worked a good majority of the time but as expected some things could slip through the net.
 
 [This is where Unity's own Project Auditor tool came in handy.](https://github.com/Unity-Technologies/ProjectAuditor) This allows you to get a project-wide view, including what assets may not have their import settings set. This meant finding these assets was much easier. The tool itself also has a lot more cool features like build reports, suggested project settings and other types of asset information. It's not an openly suggested package by Unity as it is an experimental package, but regardless, definitely check it out if you are currently making a Unity project!
 
-![unity project auditor](./unity_project_auditor.jpg)
-
+<SizedImage src={imageUnityProjectAuditor} alt="unity project auditor" width="100%" />
 Conclusion
 As I said, this isn't an exhaustive list but a fair few of the big hitters I found throughout the project for performance. For the most part, I see performance in games as being theoretically simple in that all it takes is to have a regular check of where your game is at throughout production (easier said than done). We were not as on it in the beginning but as time went on, this improved massively and meant we could ship the game without major performance concerns.
 

@@ -8,6 +8,11 @@ pinOrder: 2
 legacyPath: /2024/02/09/sega-sdt-shaders/
 ---
 
+
+import imageShaderGraphCleanliness from './shader_graph_cleanliness.jpg';
+import imageShaderGraphDepthRefractionFix from './shader_graph_depth_refraction_fix.jpg';
+import imageSdtDepthFadeShaderGraph from './sdt_depth_fade_shader_graph.jpg';
+
 <YouTube url="https://www.youtube.com/watch?v=H0jKqUIhpik" />
 
 ## Shaders
@@ -40,8 +45,7 @@ Beware of property names! In the beginning, it can be easy to name things all so
 
 I guess this is why some of Unity’s own shader property names are a bit wacky…
 
-![shader graph cleanliness](./shader_graph_cleanliness.jpg)
-
+<SizedImage src={imageShaderGraphCleanliness} alt="shader graph cleanliness" width="100%" />
 ## Shaders
 
 ### Depth Refraction Fix
@@ -54,8 +58,7 @@ Was this a bit overkill? Sure! But I think it came out well in the end...
 
 <YouTube url="https://www.youtube.com/watch?v=9DnTQxLdhT0" />
 
-![shader graph depth refraction fix](./shader_graph_depth_refraction_fix.jpg)
-
+<SizedImage src={imageShaderGraphDepthRefractionFix} alt="shader graph depth refraction fix" width="100%" />
 ### Flow Maps
 
 I used flow maps a few time throughout the project (the zone 2 goo and full-screen "dream" effect mostly), this was done using a custom sub-graph I made and achieved some great visuals. Unity now even has an example of flow maps in their [new Shader Graph package sample](https://docs.unity3d.com/Packages/com.unity.shadergraph@17.0/manual/ShaderGraph-Samples.html). I haven't checked it out myself yet, but from the video [Ben Cloward put out on Unity's YouTube channel](https://www.youtube.com/watch?v=7Rqrk8hMooU), it looks like a fantastic resource.
@@ -88,8 +91,7 @@ An alternative to using the depth buffer could instead be mesh SDFs, but as Unit
 
 <YouTube url="https://www.youtube.com/watch?v=lNfeUBTOOfA" />
 
-![sdt depth fade shader graph](./sdt_depth_fade_shader_graph.jpg)
-
+<SizedImage src={imageSdtDepthFadeShaderGraph} alt="sdt depth fade shader graph" width="100%" />
 ### Custom Vertex Interpolation
 
 [An often overlooked aspect of shader graphs (all node based shader editors really), is vertex interpolators.](https://docs.unity3d.com/Packages/com.unity.shadergraph@13.1/manual/Custom-Interpolators.html#:~:text=To%20use%20this%20feature%2C%20create,block%20in%20the%20Fragment%20context.) This allows you to calculate something in the vertex stage and pass it to the fragment. Although Unity's shader compiler is very smart and will often auto convert certain aspects of your shader to the vertex stage, it won't always and regardless, sometimes you may want to use your vertex calculation in the fragment stage.
