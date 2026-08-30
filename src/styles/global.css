@@ -582,15 +582,18 @@ h3 {
   margin-right: auto;
 }
 .prose .sized-image.align-center {
-  margin-inline: auto;
+  margin-inline: 50%;
+  transform: translateX(-50%);
 }
 .prose .sized-image.align-right {
   margin-left: auto;
 }
 .prose .sized-image img {
   width: 100%;
+  height: var(--media-height, auto);
   max-width: 100%;
   margin: 0;
+  object-fit: contain;
   transform: none;
 }
 .prose .sized-image figcaption {

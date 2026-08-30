@@ -4,24 +4,40 @@ import type { ImageMetadata } from 'astro';
 
 interface Props {
   src: ImageMetadata;
-  alt: string;
+  alt?: string;
   width?: string | number;
+  height?: string | number;
   align?: 'left' | 'center' | 'right';
   caption?: string;
+  title?: string;
 }
 
 const {
   src,
-  alt,
+  alt = '',
   width = '100%',
+  height,
   align = 'center',
   caption,
+  title,
 } = Astro.props;
 
-const mediaWidth = typeof width === 'number' ? `${width}px` : width;
+const percentage = typeof width === 'string' ? width.match(/^(\d+(?:\.\d+)?)%$/) : null;
+const widthRatio = percentage ? Number(percentage[1]) / 100 : null;
+const mediaWidth = widthRatio === null
+  ? typeof width === 'number' ? `${width}px` : width
+  : `calc(var(--page) * ${widthRatio})`;
+const mediaHeight = typeof height === 'number' ? `${height}px` : height;
+const pixelDimension = (value: string | number | undefined) => {
+  if (typeof value === 'number') return value;
+  const match = value?.match(/^(\d+(?:\.\d+)?)px$/);
+  return match ? Number(match[1]) : undefined;
+};
+const imageWidth = widthRatio === null ? pixelDimension(width) : Math.round(1160 * widthRatio);
+const imageHeight = pixelDimension(height);
 ---
 
-<figure class:list={['sized-image', `align-${align}`]} style={`--media-width: ${mediaWidth}`}>
-  <Image {src} {alt} />
+<figure class:list={['sized-image', `align-${align}`]} style={`--media-width: ${mediaWidth}${mediaHeight ? `; --media-height: ${mediaHeight}` : ''}`}>
+  <Image {src} {alt} {title} width={imageWidth} height={imageHeight} />
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
