@@ -750,6 +750,24 @@ h3 {
   align-content: start;
   gap: var(--space-2);
 }
+.project-entry {
+  min-width: 0;
+}
+.project-description {
+  margin: var(--space-2) 0 0 calc(104px + var(--space-3));
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.project-description > :first-child {
+  margin-top: 0;
+}
+.project-description > :last-child {
+  margin-bottom: 0;
+}
+.project-description img {
+  max-width: 100%;
+  height: auto;
+}
 .game {
   display: grid;
   grid-template-columns: 104px minmax(0, 1fr);
@@ -853,6 +871,9 @@ h3 {
   .game {
     grid-template-columns: 88px minmax(0, 1fr);
     gap: var(--space-2);
+  }
+  .project-description {
+    margin-left: calc(88px + var(--space-2));
   }
   .game-cover {
     width: 88px;

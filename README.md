@@ -41,6 +41,72 @@ Passing a number such as `width={520}` uses pixels.
 </details>
 
 <details>
+<summary>Add or edit an About-page project</summary>
+
+Each project is a Markdown file in `src/content/projects`. Duplicate an existing
+file or create a new `.md` or `.mdx` file with a unique filename. Use `.mdx`
+when including components such as `<YouTube />`:
+
+```markdown
+---
+title: "My new game"
+company: "sega-hardlight"
+platform: "PC & Console"
+image: "/about/my-new-game.webp"
+alt: "My new game cover artwork"
+url: "https://example.com/my-new-game"
+order: 5
+draft: false
+---
+
+Write an optional description here. **Formatting**, lists, additional pictures,
+and [links](https://example.com) use normal Markdown.
+```
+
+- Put pictures in `public/about` and reference them as `/about/filename.webp`.
+  Body images also use public paths: `![Screenshot](/about/screenshot.webp)`.
+- `company` is the filename of a company Markdown file, without `.md`. Astro
+  validates this reference, so a typo is reported during preview/build.
+- Projects are automatically grouped by company. Lower `order` values appear
+  first within each group; matching values are sorted by title. Omit `order` to
+  use 100. Set `draft: true` to hide a project.
+- For YouTube previews, use a `.mdx` extension and add the component below the
+  frontmatter (no import required):
+
+  ```mdx
+  <YouTube url="https://www.youtube.com/watch?v=hX9daejGFXA" />
+  ```
+
+  `Video` and `SizedImage` are also available in project MDX descriptions.
+  Plain `.md` files support ordinary Markdown, but cannot render components.
+  Rename a project rather than keeping both `.md` and `.mdx` copies with the
+  same filename.
+- The body below the frontmatter is the description shown below the project.
+  Leave it empty to display just the artwork, platform, and title.
+- Edit a file to update the page, add one to add a project, or remove one to
+  remove it. The local preview updates automatically. Commit and push to `main`
+  to update the deployed site through GitHub Pages.
+
+Company details live in `src/content/companies`. To add a company, create a file
+such as `my-studio.md`:
+
+```yaml
+---
+name: "My Studio"
+logo: "/about/my-studio.webp"
+role: "Technical Artist"
+tenure: "March 2027 — Present"
+order: 1
+---
+```
+
+Then use `company: "my-studio"` in its projects. Company `order` controls the
+group order, with names breaking ties. Companies without published projects are
+hidden. Company Markdown bodies are unused; edit their frontmatter fields.
+
+</details>
+
+<details>
 <summary>Asset guide</summary>
 
 Keep post-specific media beside that post's `index.mdx`. Export images at the sizes below before adding them to the repository; Astro will create smaller responsive versions where appropriate.

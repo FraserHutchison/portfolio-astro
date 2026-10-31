@@ -1,47 +1,23 @@
 ---
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config/site';
+import YouTube from '../components/YouTube.astro';
+import Video from '../components/Video.astro';
+import SizedImage from '../components/SizedImage.astro';
 
-const hardlightGames = [
-  {
-    title: 'Sonic Dream Team',
-    platform: 'Apple Arcade',
-    image: '/about/sonic-dream-team.webp',
-    alt: 'Sonic Dream Team cover artwork',
-    url: 'https://apps.apple.com/us/app/sonic-dream-team/id1609094795',
-  },
-  {
-    title: 'Sonic Forces: Speed Battle',
-    platform: 'Mobile',
-    image: '/about/sonic-forces.webp',
-    alt: 'Sonic Forces: Speed Battle cover artwork',
-    url: 'https://play.google.com/store/apps/details?id=com.sega.sprint',
-  },
-  {
-    title: 'Sonic Dash',
-    platform: 'Mobile',
-    image: '/about/sonic-dash.webp',
-    alt: 'Sonic Dash cover artwork',
-    url: 'https://play.google.com/store/apps/details?id=com.sega.sonicdash',
-  },
-  {
-    title: 'Sonic Racing',
-    platform: 'Mobile',
-    image: '/about/sonic-racing.webp',
-    alt: 'Sonic Racing artwork',
-    url: 'https://apps.apple.com/us/app/sonic-racing/id1358659909',
-  },
-];
-
-const frontierGames = [
-  {
-    title: 'F1 Manager 2022',
-    platform: 'PC & Console',
-    image: '/about/f1-manager-2022.png',
-    alt: 'F1 Manager 2022 cover artwork',
-    url: 'https://www.f1manager.com/2022',
-  },
-];
+const companies = (await getCollection('companies')).sort(
+  (a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name),
+);
+const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title),
+);
+const experience = await Promise.all(companies.map(async (company) => ({
+  ...company,
+  projects: await Promise.all(projects
+    .filter((project) => project.data.company.id === company.id)
+    .map(async (project) => ({ ...project, Content: (await render(project)).Content }))),
+})));
 ---
 <BaseLayout title="About" description="About Fraser Hutchison, a technical artist working in games.">
   <article class="about shell">
@@ -65,40 +41,28 @@ const frontierGames = [
 
     <section class="projects" aria-label="Experience">
       <div class="experience-list">
-        <section class="experience" aria-labelledby="hardlight-heading">
-          <header class="experience-heading">
-            <div class="company-lockup">
-              <img src="/about/sega-hardlight.png" alt="" />
-              <div><h3 id="hardlight-heading">SEGA HARDlight</h3><p>Technical Artist</p></div>
+        {experience.filter((company) => company.projects.length > 0).map((company) => (
+          <section class="experience" aria-labelledby={`${company.id}-heading`}>
+            <header class="experience-heading">
+              <div class="company-lockup">
+                <img src={company.data.logo} alt="" width="52" height="52" loading="lazy" />
+                <div><h3 id={`${company.id}-heading`}>{company.data.name}</h3><p>{company.data.role}</p></div>
+              </div>
+              <p class="tenure">{company.data.tenure}</p>
+            </header>
+            <div class="games-list">
+              {company.projects.map(({ data: game, body, Content }) => (
+                <article class="project-entry">
+                  <a class="game" href={game.url} target="_blank" rel="noreferrer">
+                    <img class="game-cover" src={game.image} alt={game.alt} width="104" height="104" loading="lazy" />
+                    <div><p class="eyebrow">{game.platform}</p><h4>{game.title}</h4></div>
+                  </a>
+                  {body?.trim() && <div class="project-description"><Content components={{ YouTube, Video, SizedImage }} /></div>}
+                </article>
+              ))}
             </div>
-            <p class="tenure">February 2022 — Present</p>
-          </header>
-          <div class="games-list">
-            {hardlightGames.map((game) => (
-              <a class="game" href={game.url} target="_blank" rel="noreferrer">
-                <img class="game-cover" src={game.image} alt={game.alt} width="104" height="104" loading="lazy" />
-                <div><p class="eyebrow">{game.platform}</p><h4>{game.title}</h4></div>
-              </a>
-            ))}
-          </div>
-        </section>
-        <section class="experience" aria-labelledby="frontier-heading">
-          <header class="experience-heading">
-            <div class="company-lockup">
-              <img class="frontier-logo" src="/about/frontier-developments.webp" alt="" />
-              <div><h3 id="frontier-heading">Frontier Developments</h3><p>3D Artist</p></div>
-            </div>
-            <p class="tenure">July 2021 — February 2022</p>
-          </header>
-          <div class="games-list">
-            {frontierGames.map((game) => (
-              <a class="game" href={game.url} target="_blank" rel="noreferrer">
-                <img class="game-cover" src={game.image} alt={game.alt} width="104" height="104" loading="lazy" />
-                <div><p class="eyebrow">{game.platform}</p><h4>{game.title}</h4></div>
-              </a>
-            ))}
-          </div>
-        </section>
+          </section>
+        ))}
       </div>
     </section>
   </article>
