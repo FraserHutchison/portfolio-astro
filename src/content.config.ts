@@ -43,4 +43,27 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { posts, companies, projects };
+const pages = defineCollection({
+  loader: glob({ pattern: "**/*.mdx", base: "./src/content/pages" }),
+  schema: z.object({
+    title: z.string().min(1),
+    description: z.string().min(1),
+    name: z.string().min(1),
+    role: z.string().min(1),
+    profile: z.object({
+      image: z.string().min(1),
+      alt: z.string().min(1),
+    }).optional(),
+    hero: z.object({
+      image: z.string().min(1),
+      alt: z.string(),
+    }).optional(),
+    links: z.array(z.object({
+      label: z.string().min(1),
+      url: z.url(),
+      icon: z.string().min(1).optional(),
+    })).default([]),
+  }),
+});
+
+export const collections = { posts, companies, projects, pages };

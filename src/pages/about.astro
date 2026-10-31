@@ -1,10 +1,13 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE } from '../config/site';
 import YouTube from '../components/YouTube.astro';
 import Video from '../components/Video.astro';
 import SizedImage from '../components/SizedImage.astro';
+
+const about = await getEntry('pages', 'about');
+if (!about?.data.profile) throw new Error('Missing About content or profile: src/content/pages/about.mdx');
+const { Content: AboutContent } = await render(about);
 
 const companies = (await getCollection('companies')).sort(
   (a, b) => a.data.order - b.data.order || a.data.name.localeCompare(b.data.name),
@@ -19,23 +22,21 @@ const experience = await Promise.all(companies.map(async (company) => ({
     .map(async (project) => ({ ...project, Content: (await render(project)).Content }))),
 })));
 ---
-<BaseLayout title="About" description="About Fraser Hutchison, a technical artist working in games.">
+<BaseLayout title={about.data.title} description={about.data.description}>
   <article class="about shell">
     <section class="about-intro">
       <div class="profile-frame">
-        <img class="profile-picture" src="/about/profile-picture.webp" alt="Fraser Hutchison" width="512" height="300" />
+        <img class="profile-picture" src={about.data.profile.image} alt={about.data.profile.alt} width="512" height="300" />
       </div>
       <div class="about-copy">
-        <p class="eyebrow">Fraser Hutchison</p>
-        <h1>Technical Artist</h1>
-        <p>Hi, I’m Fraser. I’m a technical artist interested in graphics and pipeline development for games, but frankly, I’m interested in just about every aspect of game development.</p>
-        <p>Most of my time is spent in Unity, though I also delve into DCC tooling, profiling, documentation, and whatever else happens to catch my interest.</p>
-        <p>Outside of games, I read a lot and watch probably too many films and TV shows.</p>
-        <div class="links">
-          <a href={SITE.social.github}><img src="/icons/github.svg" alt="" />GitHub</a>
-          <a href={SITE.social.linkedin}><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
-          <a href={SITE.social.artstation}><img src="/icons/artstation.svg" alt="" />ArtStation</a>
-        </div>
+        <p class="eyebrow">{about.data.name}</p>
+        <h1>{about.data.role}</h1>
+        <AboutContent components={{ YouTube, Video, SizedImage }} />
+        {about.data.links.length > 0 && <div class="links">
+          {about.data.links.map((link) => (
+            <a href={link.url}>{link.icon && <img src={link.icon} alt="" />}{link.label}</a>
+          ))}
+        </div>}
       </div>
     </section>
 

@@ -41,6 +41,37 @@ Passing a number such as `width={520}` uses pixels.
 </details>
 
 <details>
+<summary>Edit the homepage introduction</summary>
+
+Edit `src/content/pages/home.mdx`. The frontmatter controls the page title and
+search description, your name and role, social links, and optional hero artwork.
+The body below the frontmatter is the introductory text; normal Markdown and
+`YouTube`, `Video`, and `SizedImage` components work without imports.
+
+The Unity icon strip and automatically populated post list stay in the page
+template. Edit the longer biography separately in `src/content/pages/about.mdx`.
+
+</details>
+
+<details>
+<summary>Edit the About introduction</summary>
+
+Edit `src/content/pages/about.mdx`:
+
+- The frontmatter controls the page title and search description, your name and
+  role, profile picture and alt text, and social links. Icons on links are optional.
+- The body below the frontmatter is the biography. Use normal Markdown for
+  paragraphs, emphasis, lists, images, and links.
+- `YouTube`, `Video`, and `SizedImage` components are available without imports,
+  just like in project descriptions.
+- The experience section below the introduction is populated automatically from
+  the company and project files described below.
+
+The Astro page provides the layout; everyday content edits belong in the MDX file.
+
+</details>
+
+<details>
 <summary>Add or edit an About-page project</summary>
 
 Each project is a Markdown file in `src/content/projects`. Duplicate an existing

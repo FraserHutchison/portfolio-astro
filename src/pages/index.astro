@@ -1,24 +1,31 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PostPreview from '../components/PostPreview.astro';
 import UnityIconStrip from '../components/UnityIconStrip.astro';
-import { SITE } from '../config/site';
+import YouTube from '../components/YouTube.astro';
+import Video from '../components/Video.astro';
+import SizedImage from '../components/SizedImage.astro';
 import { sortPosts } from '../utils/posts';
+
+const home = await getEntry('pages', 'home');
+if (!home) throw new Error('Missing homepage content: src/content/pages/home.mdx');
+const { Content: HomeContent } = await render(home);
 
 const posts = (await getCollection('posts', ({ data }) => !data.draft)).sort(sortPosts);
 ---
-<BaseLayout>
+<BaseLayout title={home.data.title} description={home.data.description}>
   <div class="hero-grid">
     <section class="intro shell">
-      <p class="eyebrow">Technical Artist</p>
-      <h1>Fraser Hutchison</h1>
-      <p class="intro-copy">Technical artist specialising in Unity and URP rendering, shader development, mobile optimisation, and production tools for artists.</p>
-      <div class="links">
-        <a href={SITE.social.github}><img src="/icons/github.svg" alt="" />GitHub</a>
-        <a href={SITE.social.linkedin}><img src="/icons/linkedin.svg" alt="" />LinkedIn</a>
-      </div>
-      <img class="hero-artwork" src="/hero-artwork.svg" alt="" width="1200" height="1200" />
+      <p class="eyebrow">{home.data.role}</p>
+      <h1>{home.data.name}</h1>
+      <div class="intro-copy"><HomeContent components={{ YouTube, Video, SizedImage }} /></div>
+      {home.data.links.length > 0 && <div class="links">
+        {home.data.links.map((link) => (
+          <a href={link.url}>{link.icon && <img src={link.icon} alt="" />}{link.label}</a>
+        ))}
+      </div>}
+      {home.data.hero && <img class="hero-artwork" src={home.data.hero.image} alt={home.data.hero.alt} width="1200" height="1200" />}
     </section>
     <UnityIconStrip />
   </div>
